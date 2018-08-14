@@ -1,3 +1,6 @@
-<nz-card style="width:300px;">
-    <div echarts [options]="chartOption3" class="demo-chart"></div>
-</nz-card>
+<nz-select class="userSelect" style="width: 120px;" [(ngModel)]="currentUser" (ngModelChange)="changeUser()">
+    <nz-option nzValue="{{user.key}}" nzLabel="{{user.userName}}" *ngFor="let user of tablesService.userList"></nz-option>
+</nz-select>
+<div class="row">
+    <div echarts [options]="getChartOption('weibo_int')" class="demo-chart"></div>
+</div>

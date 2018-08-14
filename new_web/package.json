@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start-wyq": "ng serve --host 172.16.4.38 --port 7310 --proxy-config proxy.config.json",
+    "start-wyq": "ng serve --host 192.168.155.8 --port 7310 --proxy-config proxy.config.json",
     "build": "ng build --prod --base-href /view",
     "test": "ng test",
     "lint": "ng lint",
@@ -46,7 +46,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "protractor": "~5.1.2",
+    "protractor": "^5.4.0",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.4.2"

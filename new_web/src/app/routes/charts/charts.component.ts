@@ -9,54 +9,89 @@ import { NgxEchartsService } from 'ngx-echarts';
 })
 export class ChartsComponent implements OnInit {
   chartOption3: any;
-  constructor(public tablesService: TablesService, private es: NgxEchartsService) {
+  currentUser: any = '3';
+
+  // 互动: 
+  weibo_int: any = [];
+  weibo_read: any = [];
+  weibo_love: any = [];
+
+  month: any = [];
+  constructor(public tablesService: TablesService) {
     this.tablesService.currentMenu = 2;
   }
 
   ngOnInit() {
     // const echarts = this.es.echarts;
-    this.chartOption3 = {
+    this.changeUser()
+  }
+
+  getChartOption(type: string) {
+    let data = [];
+    let month = this.month;
+    switch (type) {
+      case 'weibo_int':
+        data = this.weibo_int;
+        break;
+      case 'weibo_read':
+        data = this.weibo_read;
+        break;
+      case 'weibo_love':
+        data = this.weibo_love;
+        break;
+
+      default:
+        break;
+    }
+    return {
       color: ['#1890fc', '#bfbfbf'],
+      title: {
+        text: '折线图堆叠'
+      },
       grid: {
         left: '40',
-        top: '80',
-        right: '20'
+        top: '45',
+        right: '40'
       },
       tooltip: {
         trigger: 'axis'
       },
       legend: {
-        data: ['应用数量']
+        data: ['互动总量']
       },
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        data: month
       },
       yAxis: {
-        name: '环比%',
-        type: 'value',
+        type: 'value'
       },
       series: [
         {
-          name: '环比增长',
+          name: '互动总量',
           type: 'line',
-          data: [11, 11, 15, 13, 12, 13, 10, 12, 4, 9, 11, 15],
-          symbolSize: 8,
-          markPoint: {
-            data: [
-              { type: 'max', name: '最大值' },
-              { type: 'min', name: '最小值' }
-            ]
-          },
-          markLine: {
-            data: [
-              { type: 'average', name: '平均值' }
-            ]
-          }
+          data: data,
         }
       ]
     }
+  }
+
+  async changeUser() {
+    await this.tablesService.getWeiboData("month", this.currentUser);
+    // await this.tablesService.getWeiboInfo(this.currentUser)
+    console.log(this.tablesService.weiboData);
+    let weiboData = this.tablesService.weiboData;
+    this.weibo_int = [];
+    this.weibo_read = [];
+    this.weibo_love = [];
+    this.month = [];
+    weiboData.forEach(element => {
+      this.weibo_int.push(element.weibo_int.interact);
+      this.weibo_read.push(element.weibo_read.num);
+      this.weibo_love.push(element.weibo_love.close);
+      this.month.push(element.create_date)
+    });
   }
 
 
