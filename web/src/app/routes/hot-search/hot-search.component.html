@@ -1,0 +1,23 @@
+<div class="hot-list">
+  <nz-select class="userSelect" style="width: 120px;" [(ngModel)]="currentUser" (ngModelChange)="changeUser()">
+    <nz-option nzValue="{{user.userName}}" nzLabel="{{user.userName}}" *ngFor="let user of tablesService.userList"></nz-option>
+  </nz-select>
+  <div class="result" (scroll)="scrollHandler($event)">
+    <div class="row" *ngFor="let item of tablesService.searchData">
+      <div class="keyWord">{{item.keywords}}</div>
+      <div class="search">
+        <span class="search_num">搜索量：{{item.searchNums}}</span>
+        <span class="search_rank">最高排名：{{item.topRanking}}</span>
+      </div>
+      <div class="date">
+        <span class="firstRankingTime">上榜时间：{{item.firstRankingTime}}</span>
+        <span class="duration">持续时间：{{item.duration}}</span>
+      </div>
+    </div>
+    <div class="loading">
+      <nz-spin *ngIf="tablesService.searchLoading"></nz-spin>
+      <p *ngIf="showTotal">到底啦，共：{{tablesService.searchTotal}}条</p>
+    </div>
+  </div>
+</div>
+<nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="50"></nz-pagination>

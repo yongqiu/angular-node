@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noEmitHelpers": true,
+    "pretty": false,
+    "sourceMap": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "noEmit": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "skipDefaultLibCheck": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "output/angular2/aot",
+    "app/**/*.e2e.ts",
+    "app/**/*.spec.ts"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "useCache": true,
+    "cacheDirectory": "./output/angular2/.awcache"
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  },
+  "angularCompilerOptions": {
+    "genDir": "output/angular2/aot",
+    "skipMetadataEmit": true
+  }
+}
