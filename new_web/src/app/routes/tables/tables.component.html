@@ -1,0 +1,112 @@
+<div class="table-content">
+  <div class="tools">
+    <nz-select class="userSelect" style="width: 120px;" [(ngModel)]="currentUser" (ngModelChange)="changeUser()">
+      <nz-option nzValue="{{user.key}}" nzLabel="{{user.userName}}" *ngFor="let user of tablesService.userList"></nz-option>
+    </nz-select>
+  </div>
+  <P class="title">所在榜单：{{tablesService.weibo_title}}</P>
+  <div class="table-panel">
+    <nz-tabset>
+      <nz-tab nzTitle="超话">
+        <nz-table #nzTable0 [nzData]="tablesService.suerData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
+          [nzBordered]="true">
+          <thead>
+            <tr>
+              <th nzWidth="30px" nzLeft="0px">日期</th>
+              <th nzWidth="40px"> 超话排名</th>
+              <th nzWidth="40px"> 超话粉丝数</th>
+              <th nzWidth="40px"> 超话阅读</th>
+              <th nzWidth="40px"> doki粉丝数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of nzTable0.data">
+              <td nzLeft="0px">{{data.create_date}}</td>
+              <td>{{data.super_rank}}</td>
+              <td>{{data.super_fans}}</td>
+              <td>{{data.super_read}}</td>
+              <td>{{data.doki_fans}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-tab>
+      <nz-tab nzTitle="阅读">
+        <nz-table #nzTable1 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
+          [nzBordered]="true">
+          <thead>
+            <tr>
+              <th nzWidth="30px" nzLeft="0px">日期</th>
+              <th nzWidth="40px"> 阅读总量</th>
+              <th nzWidth="40px"> 昨日排名</th>
+              <th nzWidth="40px"> 昨日评分</th>
+              <th nzWidth="40px"> 发博数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of nzTable1.data">
+              <td nzLeft="0px">{{data.create_date}}</td>
+              <td>{{data.weibo_read.num}}</td>
+              <td>{{data.weibo_read.rank_day}}</td>
+              <td>{{data.weibo_read.total_day}}</td>
+              <td>{{data.weibo_read.send}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-tab>
+      <nz-tab nzTitle="互动">
+        <nz-table #nzTable2 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
+          [nzBordered]="true">
+          <thead>
+            <tr>
+              <th nzWidth="40px" nzLeft="0px">日期</th>
+              <th nzWidth="40px"> 互动量</th>
+              <th nzWidth="40px"> 昨日排名</th>
+              <th nzWidth="40px"> 昨日评分</th>
+              <th nzWidth="40px"> 微博互动数</th>
+              <th nzWidth="40px"> 评论互动数</th>
+              <th nzWidth="40px"> 本周总评分</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of nzTable2.data">
+              <td nzLeft="0px">{{data.create_date}}</td>
+              <td>{{data.weibo_int.interact}}</td>
+              <td>{{data.weibo_int.rank_day}}</td>
+              <td>{{data.weibo_int.total_day}}</td>
+              <td>{{data.weibo_int.repost}}</td>
+              <td>{{data.weibo_int.comment}}</td>
+              <td>{{data.weibo_int.total_week}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-tab>
+      <nz-tab nzTitle="爱慕值">
+        <nz-table #nzTable3 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
+          [nzBordered]="true">
+          <thead>
+            <tr>
+              <th nzWidth="30px" nzLeft="0px">日期</th>
+              <th nzWidth="40px"> 爱慕值</th>
+              <th nzWidth="40px"> 昨日排名</th>
+              <th nzWidth="40px"> 送花人数</th>
+              <th nzWidth="40px"> 送花次数</th>
+              <th nzWidth="40px"> 昨日评分</th>
+              <th nzWidth="60px"> 本周总评分</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of nzTable3.data">
+              <td nzLeft="0px">{{data.create_date}}</td>
+              <td>{{data.weibo_love.close}}</td>
+              <td>{{data.weibo_love.rank_day}}</td>
+              <td>{{data.weibo_love.people}}</td>
+              <td>{{data.weibo_love.each}}</td>
+              <td>{{data.weibo_love.total_day}}</td>
+              <td>{{data.weibo_love.total_week}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+</div>

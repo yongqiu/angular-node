@@ -1,0 +1,1 @@
+export const serverUrl = 'https://api.laimeiyun.cn/v1'

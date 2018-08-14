@@ -1,0 +1,39 @@
+::ng-deep .table-content{
+        height: 100%;
+        padding: 70px 20px 20px 20px;
+        position: relative;
+        p.title{
+            color: #999;
+            font-size: 12px;
+            display: inline-block;
+            position: absolute;
+            top: 26px;
+            left: 165px;
+        }
+        .tools{
+            .weekSelect{
+                position: absolute;
+                top: 20px;
+            }
+            .userSelect{
+                position: absolute;
+                top: 20px;
+                left: 20px;
+            }
+        }
+        .table-panel{
+            height: 100%;
+            tr th{
+                color: #1890ff;
+            }
+            .ant-table-wrapper{
+                border: 1px solid #1890ff;
+            }
+            .ant-table-tbody>tr>td, .ant-table-thead>tr>th {
+                padding: 7px;
+                word-break: break-word;
+                text-align: center;
+            }
+        }
+        
+}
