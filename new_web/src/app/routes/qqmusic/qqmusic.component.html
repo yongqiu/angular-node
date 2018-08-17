@@ -1,0 +1,30 @@
+<div class="content">
+  <div class="inner-content">
+    <nz-tabset>
+      <nz-tab nzTitle="分时记录表">
+        <div class="table" *ngIf="userList[0] && userList[0].musicNum">
+          <nz-table [nzBordered]="true" #nzTable [nzFrontPagination]="false" [nzShowPagination]="false" [nzData]="dataSet" [nzPageSize]="10"
+            [nzScroll]="{ x:'1300px',y: '300px' }">
+            <thead>
+              <tr>
+                <th nzWidth="60px" nzLeft="0px">姓名</th>
+                <th nzWidth="80px" *ngFor="let num of userList[0].musicNum">{{num.createdAt}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of userList">
+                <td nzLeft="0px">{{data.userName}}</td>
+                <td *ngFor="let num of data.musicNum">{{num.singer_call_num}}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="走势图">
+        <p>*点击人名筛选</p>
+        <div style="height: 300px;" echarts [options]="chartOptions" class="demo-chart"></div>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+
+</div>

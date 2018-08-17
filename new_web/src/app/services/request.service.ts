@@ -107,15 +107,12 @@ export class RequestService {
   private checkResponeCode(res: Response) {
     const serverResponse = res.json();
     if (serverResponse.code == 1000) {
-      console.log("unlogin");
       // this.router.navigate(["login"]);
     }
     return serverResponse;
   }
 
   private handleError(error: Response | any): boolean {
-    console.error('baseService received request error');
-    console.log(error);
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
@@ -134,9 +131,7 @@ export class RequestService {
     return this.httpClient.request(httpRequest).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         const percentDone = Math.round(100 * event.loaded / event.total);
-        console.log(`File is ${percentDone}% uploaded.`);
       } else if (event instanceof HttpResponse) {
-        console.log('File is completely uploaded!');
       }
     });
   }
@@ -153,7 +148,6 @@ export class RequestService {
 
   private checkCode4(res: any) {
     if (res.code == 1000) {
-      console.log("unlogin");
     }
     return res;
   }

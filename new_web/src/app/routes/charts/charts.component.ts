@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TablesService } from '../../services/tables.service';
 import { NgxEchartsService } from 'ngx-echarts';
+import { menuNum } from '../../config';
 
 @Component({
   selector: 'app-charts',
@@ -18,7 +19,7 @@ export class ChartsComponent implements OnInit {
 
   month: any = [];
   constructor(public tablesService: TablesService) {
-    this.tablesService.currentMenu = 2;
+    this.tablesService.currentMenu = menuNum.charts;
   }
 
   ngOnInit() {
@@ -28,16 +29,20 @@ export class ChartsComponent implements OnInit {
 
   getChartOption(type: string) {
     let data = [];
+    let title = '';
     let month = this.month;
     switch (type) {
       case 'weibo_int':
         data = this.weibo_int;
+        title = '总互动量'
         break;
       case 'weibo_read':
         data = this.weibo_read;
+        title = '总阅读量'
         break;
       case 'weibo_love':
         data = this.weibo_love;
+        title = '爱慕值'
         break;
 
       default:
@@ -45,9 +50,6 @@ export class ChartsComponent implements OnInit {
     }
     return {
       color: ['#1890fc', '#bfbfbf'],
-      title: {
-        text: '折线图堆叠'
-      },
       grid: {
         left: '60',
         top: '45',
@@ -57,7 +59,7 @@ export class ChartsComponent implements OnInit {
         trigger: 'axis'
       },
       legend: {
-        data: ['互动总量']
+        data: [title]
       },
       xAxis: {
         type: 'category',
@@ -69,7 +71,7 @@ export class ChartsComponent implements OnInit {
       },
       series: [
         {
-          name: '互动总量',
+          name: title,
           type: 'line',
           data: data,
         }
@@ -80,7 +82,6 @@ export class ChartsComponent implements OnInit {
   async changeUser() {
     await this.tablesService.getWeiboData("month", this.currentUser);
     // await this.tablesService.getWeiboInfo(this.currentUser)
-    console.log(this.tablesService.weiboData);
     let weiboData = this.tablesService.weiboData;
     this.weibo_int = [];
     this.weibo_read = [];

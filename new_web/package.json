@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start-wyq": "ng serve --host 192.168.3.3 --port 7310 --proxy-config proxy.config.json",
+    "start-wyq": "ng serve --host 172.16.4.50 --port 7310 --proxy-config proxy.config.json",
     "build": "ng build --prod --base-href /view",
     "test": "ng test",
     "lint": "ng lint",

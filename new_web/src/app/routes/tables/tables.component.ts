@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TablesService } from '../../services/tables.service';
-
+import { menuNum } from '../../config';
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
@@ -11,7 +11,7 @@ export class TablesComponent implements OnInit {
   weekFliter: string = "month";
   currentUser: any = '3';
   constructor(public tablesService: TablesService) { 
-    this.tablesService.currentMenu = 1;
+    this.tablesService.currentMenu = menuNum.weiboData;
   }
 
   ngOnInit() {
@@ -25,7 +25,6 @@ export class TablesComponent implements OnInit {
 
     this.tablesService.getWeiboData(this.weekFliter, this.currentUser);
     this.tablesService.getWeiboInfo(this.currentUser);
-    this.tablesService.getMusicInfo()
     // this.tablesService.getHotSearch();
   }
 
@@ -36,7 +35,6 @@ export class TablesComponent implements OnInit {
 
 
   changeUser(){
-    console.log(this.currentUser)
     this.tablesService.getWeiboData(this.weekFliter, this.currentUser);
     this.tablesService.getWeiboInfo(this.currentUser)
   }

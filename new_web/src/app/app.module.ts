@@ -28,6 +28,7 @@ export const routes = [
       { path: 'table', loadChildren: './routes/tables/tables.module#TablesModule' },
       { path: 'hot-search', loadChildren: './routes/hot-search/hot-search.module#HotSearchModule' },
       { path: 'charts', loadChildren: './routes/charts/charts.module#ChartsModule' },
+      { path: 'qqmusic', loadChildren: './routes/qqmusic/qqmusic.module#QqmusicModule' },
     ]
   },
   // {

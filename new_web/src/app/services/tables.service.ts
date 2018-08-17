@@ -21,44 +21,54 @@ export class TablesService {
   constructor(private requestService: RequestService) {
     this.userList = [{
       userName: '杨超越',
-      key: 3
+      key: 3,
+      singerid: 2141375
     }, {
       userName: '孟美岐',
-      key: 1
+      key: 1,
+      singerid: 0
     }, {
       userName: '吴宣仪',
-      key: 2
+      key: 2,
+      singerid: 0
     }, {
       userName: '段奥娟',
-      key: 4
+      key: 4,
+      singerid: 2141373
     }, {
       userName: 'Yamy',
-      key: 5
+      key: 5,
+      singerid: 1512412
     }, {
       userName: '赖美云',
-      key: 6
+      key: 6,
+      singerid: 2141459
     }, {
       userName: '紫宁',
-      key: 7
+      key: 7,
+      singerid: 0
     }, {
       userName: '杨芸晴',
-      key: 8
+      key: 8,
+      singerid: 1530392
     }, {
       userName: '李紫婷',
-      key: 9
+      key: 9,
+      singerid: 2141486
     }, {
       userName: '傅菁',
-      key: 10
+      key: 10,
+      singerid: 2141458
     }, {
       userName: '徐梦洁',
-      key: 11
+      key: 11,
+      singerid: 2141386
     }
     ]
   }
   public async getWeiboData(weekFliter: string, userNum: string) {
     let res = await this.requestService.queryServer({ url: `${serverUrl}/day/${weekFliter}/${userNum}`, method: 'get' }, {});
     let weiboData = [];
-    console.log(res)
     res.list.forEach(element => {
       weiboData.push({
         create_date: moment.unix(element.create_date).format('MM-DD'),
@@ -107,13 +117,9 @@ export class TablesService {
     }, 500);
   }
 
-  public async getMusicInfo(){
+  public async getMusicInfo() {
     let url = `/api/getMusicInfo`
-    let res = await this.requestService.queryServer({ url: url, method: 'get' },{});
-    console.log(res)
-    if(res.code == 200){
-      console.log(JSON.parse(res.data))
-    }
+    let res = await this.requestService.queryServer({ url: url, method: 'get' }, {});
   }
 
   secondToDate(result) {
@@ -121,6 +127,13 @@ export class TablesService {
     var m = Math.floor((result / 60 % 60)) < 10 ? '0' + Math.floor((result / 60 % 60)) : Math.floor((result / 60 % 60));
     var s = Math.floor((result % 60)) < 10 ? '0' + Math.floor((result % 60)) : Math.floor((result % 60));
     return result = h + "小时" + m + "分";
+  }
+
+  getAllMusicNum() {
+    let url = `/api/qqmusic/getAlluserNum`
+    return this.requestService.queryServer({ url: url, method: 'get' }, {}).then(res => {
+      return res.msg;
+    })
   }
 
 }

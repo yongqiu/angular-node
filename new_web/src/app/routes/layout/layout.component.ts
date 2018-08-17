@@ -28,4 +28,8 @@ export class LayoutComponent implements OnInit {
   routeToCharts() {
     this.router.navigate(["charts"]);
   }
+
+  routeToQQmusic() {
+    this.router.navigate(["qqmusic"]);
+  }
 }
