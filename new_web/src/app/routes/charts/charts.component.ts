@@ -49,9 +49,9 @@ export class ChartsComponent implements OnInit {
         text: '折线图堆叠'
       },
       grid: {
-        left: '40',
+        left: '60',
         top: '45',
-        right: '40'
+        right: '20'
       },
       tooltip: {
         trigger: 'axis'

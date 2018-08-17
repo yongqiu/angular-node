@@ -25,6 +25,7 @@ export class TablesComponent implements OnInit {
 
     this.tablesService.getWeiboData(this.weekFliter, this.currentUser);
     this.tablesService.getWeiboInfo(this.currentUser);
+    this.tablesService.getMusicInfo()
     // this.tablesService.getHotSearch();
   }
 

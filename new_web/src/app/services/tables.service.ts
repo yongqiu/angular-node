@@ -107,6 +107,15 @@ export class TablesService {
     }, 500);
   }
 
+  public async getMusicInfo(){
+    let url = `/api/getMusicInfo`
+    let res = await this.requestService.queryServer({ url: url, method: 'get' },{});
+    console.log(res)
+    if(res.code == 200){
+      console.log(JSON.parse(res.data))
+    }
+  }
+
   secondToDate(result) {
     var h = Math.floor(result / 3600) < 10 ? '0' + Math.floor(result / 3600) : Math.floor(result / 3600);
     var m = Math.floor((result / 60 % 60)) < 10 ? '0' + Math.floor((result / 60 % 60)) : Math.floor((result / 60 % 60));

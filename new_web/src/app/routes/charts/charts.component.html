@@ -1,6 +1,6 @@
 <nz-select class="userSelect" style="width: 120px;" [(ngModel)]="currentUser" (ngModelChange)="changeUser()">
     <nz-option nzValue="{{user.key}}" nzLabel="{{user.userName}}" *ngFor="let user of tablesService.userList"></nz-option>
 </nz-select>
-<div class="row">
-    <div echarts [options]="getChartOption('weibo_int')" class="demo-chart"></div>
+<div class="row" style="height: 300px;">
+    <div style="height: 300px;" echarts [options]="getChartOption('weibo_int')" class="demo-chart"></div>
 </div>
