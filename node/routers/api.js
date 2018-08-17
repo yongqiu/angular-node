@@ -138,7 +138,6 @@ router.get('/qqmusic/getAlluserNum', function (req, res) {
                 };
             }
             // 以json形式，把操作结果返回给前台页面
-            console.log(err)
             // 释放连接  
             res.json(result)
             connection.release();
@@ -157,7 +156,6 @@ router.get('/qqmusic/getNumbyId', function (req, res) {
                 };
             }
             // 以json形式，把操作结果返回给前台页面
-            console.log(err)
             // 释放连接  
             res.json(result)
             connection.release();

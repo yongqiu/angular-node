@@ -27,8 +27,6 @@ export class QqmusicComponent implements OnInit {
         address: `London, Park Lane no. ${i}`
       });
     }
-
-
   }
 
   renderChart() {
@@ -77,7 +75,7 @@ export class QqmusicComponent implements OnInit {
         if (element.singerid == user.singerid) {
           user.musicNum.push({
             singer_call_num: element.singer_call_num,
-            createdAt: moment.unix(element.createdAt).format('MM-DD hh:mm')
+            createdAt: moment.unix(element.createdAt).format('MM-DD HH:mm')
           })
         }
       });
@@ -85,7 +83,6 @@ export class QqmusicComponent implements OnInit {
     this.seriesData.forEach(element => {
       element.data = [];
       element.type = 'line';
-      element.stack = '总量';
       let find = this.userList.find(item => {
         return item.userName == element.name
       })
@@ -102,8 +99,12 @@ export class QqmusicComponent implements OnInit {
     this.userList[0].musicNum.forEach(info => {
       this.dates.push(info.createdAt)
     });
-    this.names.splice(0, 1)
     this.dates.splice(0, 1)
+    console.log(this.seriesData)
+    console.log(this.names)
+    console.log(this.dates)
+
+
     this.renderChart()
 
   }
