@@ -51,7 +51,7 @@ export class ChartsComponent implements OnInit {
     return {
       color: ['#1890fc', '#bfbfbf'],
       grid: {
-        left: '60',
+        left: '50',
         top: '45',
         right: '20'
       },
@@ -67,7 +67,18 @@ export class ChartsComponent implements OnInit {
         data: month
       },
       yAxis: {
-        type: 'value'
+        type: 'value',
+        axisLabel: {
+          margin: 8,
+          formatter: function (value, index) {
+            if (value >= 10000 && value < 10000000) {
+              value = value / 10000 + "万";
+            } else if (value >= 10000000) {
+              value = value / 10000000 + "千万";
+            }
+            return value;
+          }
+        },
       },
       series: [
         {
@@ -87,7 +98,7 @@ export class ChartsComponent implements OnInit {
     this.weibo_read = [];
     this.weibo_love = [];
     this.month = [];
-    weiboData.forEach(element => {
+    weiboData.reverse().forEach(element => {
       this.weibo_int.push(element.weibo_int.interact);
       this.weibo_read.push(element.weibo_read.num);
       this.weibo_love.push(element.weibo_love.close);

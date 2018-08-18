@@ -68,6 +68,8 @@ function updateMusicRank(res) {
                         };
                     }
                     // 以json形式，把操作结果返回给前台页面
+                    console.log(err);
+                    
                     // 释放连接  
                     connection.release();
                 });
@@ -101,7 +103,7 @@ router.get('/getHotSearch', function (req, res, next) {
     });
 })
 
-router.get('/getMusicInfo', function (req, res, next) {
+router.get('/qqmusic/getNowData', function (req, res, next) {
     // console.log(req.query)
     let param = { "comm": { "g_tk": 5381, "uin": 0, "format": "json", "inCharset": "utf-8", "outCharset": "utf-8", "notice": 0, "platform": "h5", "needNewCode": 1 }, "requestSingerCallList": { "method": "AlbumSingerRankList", "param": { "actid": 279 }, "module": "mall.AlbumCallSvr" }, "requestUserInfo": { "method": "UsrCallInfo", "param": { "actid": 279 }, "module": "mall.AlbumCallSvr" } }
     var e = request({

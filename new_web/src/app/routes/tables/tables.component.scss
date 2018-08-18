@@ -1,13 +1,13 @@
 ::ng-deep .table-content{
         height: 100%;
-        padding: 70px 20px 20px 20px;
+        padding: 50px 20px 20px 20px;
         position: relative;
         p.title{
             color: #999;
             font-size: 12px;
             display: inline-block;
             position: absolute;
-            top: 26px;
+            top: 20px;
             left: 165px;
         }
         .tools{
@@ -17,7 +17,7 @@
             }
             .userSelect{
                 position: absolute;
-                top: 20px;
+                top: 12px;
                 left: 20px;
             }
         }

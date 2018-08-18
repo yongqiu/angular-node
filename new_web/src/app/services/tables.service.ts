@@ -129,10 +129,21 @@ export class TablesService {
     return result = h + "小时" + m + "分";
   }
 
+  // 获取最后80条信息
   getAllMusicNum() {
     let url = `/api/qqmusic/getAlluserNum`
     return this.requestService.queryServer({ url: url, method: 'get' }, {}).then(res => {
       return res.msg;
+    })
+  }
+
+  // 获取当前时间的信息
+  getCurrentMusicNum() {
+    let url = `/api/qqmusic/getNowData`;
+    return this.requestService.queryServer({ url: url, method: 'get' }, {}).then(res => {
+      if(res.code == 200){
+        return JSON.parse(res.data)
+      }
     })
   }
 

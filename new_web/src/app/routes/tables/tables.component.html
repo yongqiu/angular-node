@@ -3,11 +3,13 @@
     <nz-select class="userSelect" style="width: 120px;" [(ngModel)]="currentUser" (ngModelChange)="changeUser()">
       <nz-option nzValue="{{user.key}}" nzLabel="{{user.userName}}" *ngFor="let user of tablesService.userList"></nz-option>
     </nz-select>
+    <P class="title">所在榜单：{{tablesService.weibo_title}}</P>
   </div>
-  <P class="title">所在榜单：{{tablesService.weibo_title}}</P>
+  
   <div class="table-panel">
     <nz-tabset>
       <nz-tab nzTitle="超话">
+        <p>*当前成员一个月内数据，表格可向左拖动查看</p>
         <nz-table #nzTable0 [nzData]="tablesService.suerData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
           [nzBordered]="true">
           <thead>
@@ -31,6 +33,7 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="阅读">
+        <p>*当前成员一个月内数据，表格可向左拖动查看</p>
         <nz-table #nzTable1 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
           [nzBordered]="true">
           <thead>
@@ -54,6 +57,7 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="互动">
+        <p>*当前成员一个月内数据，表格可向左拖动查看</p>
         <nz-table #nzTable2 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
           [nzBordered]="true">
           <thead>
@@ -81,6 +85,7 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="爱慕值">
+        <p>*当前成员一个月内数据，表格可向左拖动查看</p>
         <nz-table #nzTable3 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
           [nzBordered]="true">
           <thead>

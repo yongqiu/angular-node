@@ -14,6 +14,7 @@ export class QqmusicComponent implements OnInit {
   names: any = [];
   seriesData: any = [];
   dates: any = [];
+  tableData: any = [];
   constructor(public tablesService: TablesService) {
 
   }
@@ -39,7 +40,7 @@ export class QqmusicComponent implements OnInit {
       },
       grid: {
         left: '3%',
-        right: '4%',
+        right: '5%',
         bottom: '3%',
         containLabel: true
       },
@@ -80,6 +81,12 @@ export class QqmusicComponent implements OnInit {
         }
       });
     });
+    this.initChartData();
+    this.initTableData();
+  }
+
+  initChartData() {
+    // 生成图表数据
     this.seriesData.forEach(element => {
       element.data = [];
       element.type = 'line';
@@ -100,13 +107,45 @@ export class QqmusicComponent implements OnInit {
       this.dates.push(info.createdAt)
     });
     this.dates.splice(0, 1)
-    console.log(this.seriesData)
-    console.log(this.names)
-    console.log(this.dates)
-
-
     this.renderChart()
+  }
 
+  initTableData() {
+    let tableData = this.userList;
+    this.tableData = [];
+    // 表格数据
+    this.tablesService.getCurrentMusicNum().then(res => {
+      let ranklist = res.requestSingerCallList.data.ranklist;
+      tableData.forEach(element => {
+        let finder = ranklist.find(info => {
+          return info.singerid == element.singerid
+        })
+        element.musicNum.push({
+          singer_call_num: finder.singer_call_num,
+          createdAt: moment().format('MM-DD HH:mm')
+        })
+        element.musicNum.reverse()
+      });
+      this.dealArray(tableData)
+
+
+      this.tableData = tableData;
+    })
+  }
+
+  dealArray(tableData){
+    var max;
+    for (var i = 0; i < tableData.length; i++) {
+      　　　　　　　　　　//外层循环一次，就拿arr[i] 和 内层循环arr.legend次的 arr[j] 做对比
+      for (var j = i; j < tableData.length; j++) {
+        if (tableData[i].musicNum[0].singer_call_num < tableData[j].musicNum[0].singer_call_num) {
+          //如果arr[j]大就把此时的值赋值给最大值变量max
+          max = tableData[j];
+          tableData[j] = tableData[i];
+          tableData[i] = max;
+        }
+      }
+    }
   }
 
 }

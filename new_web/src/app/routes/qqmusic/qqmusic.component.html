@@ -2,17 +2,18 @@
   <div class="inner-content">
     <nz-tabset>
       <nz-tab nzTitle="分时记录表">
-        <div class="table" *ngIf="userList[0] && userList[0].musicNum">
+        <p>*每小时记录一次，第一列为当前时刻数据</p>
+        <div class="table" *ngIf="tableData[0] && tableData[0].musicNum">
           <nz-table [nzBordered]="true" #nzTable [nzFrontPagination]="false" [nzShowPagination]="false" [nzData]="dataSet" [nzPageSize]="10"
-            [nzScroll]="{ x:'1300px',y: '300px' }">
+            [nzScroll]="{ x:'1400px',y: '300px' }">
             <thead>
               <tr>
                 <th nzWidth="60px" nzLeft="0px">姓名</th>
-                <th nzWidth="80px" *ngFor="let num of userList[0].musicNum">{{num.createdAt}}</th>
+                <th nzWidth="80px" *ngFor="let num of tableData[0].musicNum">{{num.createdAt}}</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let data of userList">
+              <tr *ngFor="let data of tableData">
                 <td nzLeft="0px">{{data.userName}}</td>
                 <td *ngFor="let num of data.musicNum">{{num.singer_call_num}}</td>
               </tr>
