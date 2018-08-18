@@ -69,7 +69,7 @@ function updateMusicRank(res) {
                     }
                     // 以json形式，把操作结果返回给前台页面
                     console.log(err);
-                    
+
                     // 释放连接  
                     connection.release();
                 });
@@ -164,6 +164,48 @@ router.get('/qqmusic/getNumbyId', function (req, res) {
         });
     })
 })
+
+router.get('/weibo/data', function (req, res, next) {
+    // console.log(req.query)
+    let weekFliter = req.query.weekFliter;
+    let userNum = req.query.userNum;
+    var e = request({
+        url: `https://api.laimeiyun.cn/v1/day/${weekFliter}/${userNum}`,
+        method: 'GET',
+        // headers: { 'Content-Type': 'text/json' }
+    }, function (error, response, body) {
+        var responseData = {
+            code: 200,
+            data: body,
+        }
+        res.json(responseData)
+        // res.send(JSON.parse(body));
+        // if (!error && response.statusCode == 200) {
+        //     res.render('task', { 'data': JSON.parse(body) });
+        // }
+    });
+})
+
+router.get('/weibo/info', function (req, res, next) {
+    // console.log(req.query)
+    let userNum = req.query.userNum;
+    var e = request({
+        url: `https://api.laimeiyun.cn/v1/hour/month/${userNum}`,
+        method: 'GET',
+        // headers: { 'Content-Type': 'text/json' }
+    }, function (error, response, body) {
+        var responseData = {
+            code: 200,
+            data: body,
+        }
+        res.json(responseData)
+        // res.send(JSON.parse(body));
+        // if (!error && response.statusCode == 200) {
+        //     res.render('task', { 'data': JSON.parse(body) });
+        // }
+    });
+})
+
 
 
 

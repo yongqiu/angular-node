@@ -67,9 +67,10 @@ export class TablesService {
     ]
   }
   public async getWeiboData(weekFliter: string, userNum: string) {
-    let res = await this.requestService.queryServer({ url: `${serverUrl}/day/${weekFliter}/${userNum}`, method: 'get' }, {});
+    let res = await this.requestService.queryServer({ url: `/api/weibo/data`, method: 'get' }, { weekFliter: weekFliter, userNum: userNum });
     let weiboData = [];
-    res.list.forEach(element => {
+    let data = JSON.parse(res.data)
+    data.list.forEach(element => {
       weiboData.push({
         create_date: moment.unix(element.create_date).format('MM-DD'),
         weibo_read: element.weibo_read,
@@ -77,14 +78,15 @@ export class TablesService {
         weibo_love: element.weibo_love
       })
     });
-    this.weibo_title = res.list[0].weibo_total.title;
+    this.weibo_title = data.list[0].weibo_total.title;
     this.weiboData = weiboData;
   }
 
   public async getWeiboInfo(userNum: string) {
-    let res = await this.requestService.queryServer({ url: `${serverUrl}/hour/month/${userNum}`, method: 'get' }, {});
+    let res = await this.requestService.queryServer({ url: `/api/weibo/info`, method: 'get' }, { userNum: userNum });
+    let data = JSON.parse(res.data)
     let suerData = [];
-    res.list.forEach(element => {
+    data.list.forEach(element => {
       suerData.push({
         create_date: moment.unix(element.create_date).format('MM-DD'),
         super_rank: element.super_rank,
@@ -141,7 +143,7 @@ export class TablesService {
   getCurrentMusicNum() {
     let url = `/api/qqmusic/getNowData`;
     return this.requestService.queryServer({ url: url, method: 'get' }, {}).then(res => {
-      if(res.code == 200){
+      if (res.code == 200) {
         return JSON.parse(res.data)
       }
     })
