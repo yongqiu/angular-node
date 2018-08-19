@@ -39,10 +39,11 @@ export class HotSearchComponent implements OnInit {
     let scrollHeight = e.target.scrollHeight;
     let check = scrollHeight - clientHeight;
 
-    if (scrollTop == check) {
+    if (scrollTop == check) {    
       this.tablesService.searchLoading = true;
       this.pageIndex = this.pageIndex + 1;
       if (this.pageIndex <= this.tablesService.searchTotalPage) {
+        
         this.tablesService.getHotSearch(this.pageIndex, this.currentUser)
       } else {
         this.tablesService.searchLoading = false;

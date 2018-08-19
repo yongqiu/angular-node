@@ -15,7 +15,7 @@ import { LayoutComponent } from './routes/layout/layout.component';
 
 registerLocaleData(zh);
 export const routes = [
-  { path: '', redirectTo: 'table', pathMatch: 'full' },
+  { path: '', redirectTo: 'qqmusic', pathMatch: 'full' },
   // { path: '**', redirectTo: 'table' },
   // {
   //   path: 'hot-search',

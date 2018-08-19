@@ -10,7 +10,7 @@
     <nz-tabset>
       <nz-tab nzTitle="超话">
         <p>*当前成员一个月内数据，表格可向左拖动查看</p>
-        <nz-table #nzTable0 [nzData]="tablesService.suerData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
+        <nz-table #nzTable0 [nzData]="tablesService.suerData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'530px',y: '300px' }"
           [nzBordered]="true">
           <thead>
             <tr>
@@ -39,8 +39,8 @@
           <thead>
             <tr>
               <th nzWidth="30px" nzLeft="0px">日期</th>
-              <th nzWidth="40px"> 阅读总量</th>
               <th nzWidth="40px"> 昨日排名</th>
+              <th nzWidth="40px"> 阅读总量</th>
               <th nzWidth="40px"> 昨日评分</th>
               <th nzWidth="40px"> 发博数</th>
             </tr>
@@ -48,8 +48,8 @@
           <tbody>
             <tr *ngFor="let data of nzTable1.data">
               <td nzLeft="0px">{{data.create_date}}</td>
-              <td>{{data.weibo_read.num}}</td>
               <td>{{data.weibo_read.rank_day}}</td>
+              <td>{{data.weibo_read.num}}</td>
               <td>{{data.weibo_read.total_day}}</td>
               <td>{{data.weibo_read.send}}</td>
             </tr>
@@ -58,13 +58,13 @@
       </nz-tab>
       <nz-tab nzTitle="互动">
         <p>*当前成员一个月内数据，表格可向左拖动查看</p>
-        <nz-table #nzTable2 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
+        <nz-table #nzTable2 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'800px',y: '300px' }"
           [nzBordered]="true">
           <thead>
             <tr>
               <th nzWidth="40px" nzLeft="0px">日期</th>
-              <th nzWidth="40px"> 互动量</th>
               <th nzWidth="40px"> 昨日排名</th>
+              <th nzWidth="40px"> 互动量</th>
               <th nzWidth="40px"> 昨日评分</th>
               <th nzWidth="40px"> 微博互动数</th>
               <th nzWidth="40px"> 评论互动数</th>
@@ -74,8 +74,8 @@
           <tbody>
             <tr *ngFor="let data of nzTable2.data">
               <td nzLeft="0px">{{data.create_date}}</td>
-              <td>{{data.weibo_int.interact}}</td>
               <td>{{data.weibo_int.rank_day}}</td>
+              <td>{{data.weibo_int.interact}}</td>
               <td>{{data.weibo_int.total_day}}</td>
               <td>{{data.weibo_int.repost}}</td>
               <td>{{data.weibo_int.comment}}</td>

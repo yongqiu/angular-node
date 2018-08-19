@@ -12,6 +12,7 @@ export class TablesComponent implements OnInit {
   currentUser: any = '3';
   constructor(public tablesService: TablesService) { 
     this.tablesService.currentMenu = menuNum.weiboData;
+
   }
 
   ngOnInit() {

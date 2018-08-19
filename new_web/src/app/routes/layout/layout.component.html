@@ -8,19 +8,19 @@
     <ul>
       <li nz-menu-group>
         <ul>
-          <li nz-menu-item (click)="routeToQQmusic()">qq音乐数字专辑</li>
+          <li nz-menu-item [nzSelected]="tablesService.currentMenu == 1" (click)="routeToQQmusic()">qq音乐数字专辑</li>
         </ul>
       </li>
     </ul>
   </li>
-  <li nz-submenu>
+  <li nz-submenu >
     <span title>
       <i class="anticon anticon-weibo"></i>微博</span>
     <ul>
       <li nz-menu-group>
         <ul>
-          <li nz-menu-item (click)="routeToTable()">数据</li>
-          <li nz-menu-item (click)="routeToCharts()">图表</li>
+          <li nz-menu-item [nzSelected]="tablesService.currentMenu == 2" (click)="routeToTable()">数据</li>
+          <li nz-menu-item [nzSelected]="tablesService.currentMenu == 3" (click)="routeToCharts()">图表</li>
         </ul>
       </li>
     </ul>

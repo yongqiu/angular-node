@@ -1,7 +1,11 @@
 <div class="hot-list">
-  <nz-select class="userSelect" style="width: 120px;" [(ngModel)]="currentUser" (ngModelChange)="changeUser()">
-    <nz-option nzValue="{{user.userName}}" nzLabel="{{user.userName}}" *ngFor="let user of tablesService.userList"></nz-option>
-  </nz-select>
+  <div class="select-box">
+    <nz-select class="userSelect" style="width: 120px;" [(ngModel)]="currentUser" (ngModelChange)="changeUser()">
+      <nz-option nzValue="{{user.userName}}" nzLabel="{{user.userName}}" *ngFor="let user of tablesService.userList"></nz-option>
+    </nz-select>
+    <p class="total">相关热搜共：{{tablesService.searchTotal}}条</p>
+    <p class="tips">*实时热搜榜每10分钟更新</p>
+  </div>
   <div class="result" (scroll)="scrollHandler($event)">
     <div class="row" *ngFor="let item of tablesService.searchData">
       <div class="keyWord">{{item.keywords}}</div>
@@ -16,8 +20,6 @@
     </div>
     <div class="loading">
       <nz-spin *ngIf="tablesService.searchLoading"></nz-spin>
-      <p *ngIf="showTotal">到底啦，共：{{tablesService.searchTotal}}条</p>
     </div>
   </div>
 </div>
-<nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="50"></nz-pagination>

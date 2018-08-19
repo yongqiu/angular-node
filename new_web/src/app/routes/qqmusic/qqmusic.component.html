@@ -1,11 +1,12 @@
 <div class="content">
   <div class="inner-content">
-    <nz-tabset>
+    <p class="page-title">qq音乐数字专辑销量</p>
+    <nz-tabset [nzSize]="'small'">
       <nz-tab nzTitle="分时记录表">
-        <p>*每小时记录一次，第一列为当前时刻数据</p>
+        <p class="tips">*每小时记录一次，第一列为当前时刻数据</p>
         <div class="table" *ngIf="tableData[0] && tableData[0].musicNum">
           <nz-table [nzBordered]="true" #nzTable [nzFrontPagination]="false" [nzShowPagination]="false" [nzData]="dataSet" [nzPageSize]="10"
-            [nzScroll]="{ x:'1400px',y: '300px' }">
+            [nzScroll]="{ x:'1300px',y: tableHeight+'px'}">
             <thead>
               <tr>
                 <th nzWidth="60px" nzLeft="0px">姓名</th>
@@ -24,6 +25,8 @@
       <nz-tab nzTitle="走势图">
         <p>*点击人名筛选，该表为每小时销售量增长曲线</p>
         <div style="height: 300px;" echarts [options]="chartOptions" class="demo-chart"></div>
+
+
       </nz-tab>
     </nz-tabset>
   </div>

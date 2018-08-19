@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TablesService } from '../../services/tables.service';
 import * as moment from 'moment';
+import { menuNum } from '../../config';
 
 @Component({
   selector: 'app-qqmusic',
@@ -15,8 +16,9 @@ export class QqmusicComponent implements OnInit {
   seriesData: any = [];
   dates: any = [];
   tableData: any = [];
+  tableHeight :number = 300;
   constructor(public tablesService: TablesService) {
-
+    this.tablesService.currentMenu = menuNum.qqmusic;
   }
 
   ngOnInit() {
@@ -39,9 +41,8 @@ export class QqmusicComponent implements OnInit {
         data: this.names
       },
       grid: {
-        left: '3%',
-        right: '5%',
-        bottom: '3%',
+        left: '8px',
+        right: '25px',
         containLabel: true
       },
       xAxis: {
@@ -76,7 +77,7 @@ export class QqmusicComponent implements OnInit {
         if (element.singerid == user.singerid) {
           user.musicNum.push({
             singer_call_num: element.singer_call_num,
-            createdAt: moment.unix(element.createdAt).format('MM-DD HH:mm')
+            createdAt: moment.unix(element.createdAt).format('DD日HH点')
           })
         }
       });
@@ -122,7 +123,7 @@ export class QqmusicComponent implements OnInit {
         })
         element.musicNum.push({
           singer_call_num: finder.singer_call_num,
-          createdAt: moment().format('MM-DD HH:mm')
+          createdAt: `即时${moment().format('HH:mm')}`
         })
         element.musicNum.reverse()
       });

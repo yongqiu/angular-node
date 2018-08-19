@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Params, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TablesService } from '../../services/tables.service';
-
+import 'rxjs/add/operator/filter';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -9,8 +9,11 @@ import { TablesService } from '../../services/tables.service';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor(private router: Router, public tablesService: TablesService) {
-
+  constructor(private router: Router, public tablesService: TablesService, private activatedRoute: ActivatedRoute) {
+    this.router.events.filter((event) => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
+      //do something
+      // console.log(event)
+    });
   }
 
   ngOnInit() {

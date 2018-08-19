@@ -36,7 +36,7 @@ export class TablesService {
       key: 4,
       singerid: 2141373
     }, {
-      userName: 'Yamy',
+      userName: 'yamy',
       key: 5,
       singerid: 1512412
     }, {
@@ -48,7 +48,7 @@ export class TablesService {
       key: 7,
       singerid: 0
     }, {
-      userName: '杨芸晴',
+      userName: 'sunnee',
       key: 8,
       singerid: 1530392
     }, {
@@ -92,7 +92,7 @@ export class TablesService {
         super_rank: element.super_rank,
         super_fans: element.super_fans,
         super_read: element.super_read,
-        doki_fans: element.doki_fans
+        doki_fans: `${parseInt((element.doki_fans/10000).toString())}万`
       })
     });
     this.suerData = suerData;
@@ -116,7 +116,7 @@ export class TablesService {
         });
       });
       this.searchLoading = false;
-    }, 500);
+    }, 300);
   }
 
   public async getMusicInfo() {

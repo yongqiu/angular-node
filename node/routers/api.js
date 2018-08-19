@@ -20,7 +20,7 @@ function scheduleCronstyle() {
     });
 }
 
-scheduleCronstyle();
+// scheduleCronstyle();
 
 // 所有路径的api请求，都默认返回的参数
 /*
