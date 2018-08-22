@@ -11,8 +11,9 @@
     </p>
     <nz-tabset [nzSize]="'small'">
       <nz-tab nzTitle="分时记录表">
-        <p class="spinBox">
-          <nz-spin *ngIf="loading"></nz-spin>
+        <p class="tips">*每小时获取一次，最长显示11小时</p>
+        <p class="spinBox"  *ngIf="loading">
+          <nz-spin></nz-spin>
         </p>
         <!-- <p class="tips">*每小时记录一次，第一列为当前时刻数据</p> -->
         <div class="table" *ngIf="totalArray[0] && totalArray[0].musicNum && !loading">
@@ -34,9 +35,9 @@
         </div>
       </nz-tab>
       <nz-tab nzTitle="走势图">
-        <p>*点击人名筛选，该表为销售量增长曲线</p>
-        <p class="spinBox">
-          <nz-spin *ngIf="loading"></nz-spin>
+        <p class="tips">*点击人名筛选，该表为销售量增长曲线</p>
+        <p class="spinBox"  *ngIf="loading">
+          <nz-spin></nz-spin>
         </p>
         <div *ngIf="!loading" style="height: 300px;" echarts [options]="chartOptions" class="demo-chart"></div>
 

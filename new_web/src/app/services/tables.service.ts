@@ -17,7 +17,7 @@ export class TablesService {
   // 成员
   userList: any = [];
 
-  tableHeight: any = '300px';
+  tableHeight: any = '280px';
 
   currentMenu: number = 1;
   constructor(private requestService: RequestService) {
@@ -65,8 +65,7 @@ export class TablesService {
       userName: '徐梦洁',
       key: 11,
       singerid: 2141386
-    }
-    ]
+    }]
   }
   public async getWeiboData(weekFliter: string, userNum: string) {
     let res = await this.requestService.queryServer({ url: `/api/weibo/data`, method: 'get' }, { weekFliter: weekFliter, userNum: userNum });
@@ -155,6 +154,32 @@ export class TablesService {
       if (res.code == 200) {
         return JSON.parse(res.data)
       }
+    })
+  }
+
+  // 获取chiji当前数据
+  getChijiCurrent() {
+    let url = `/api/chiji/getNowData`;
+    return this.requestService.queryServer({ url: url, method: 'get' }, {}).then(res => {
+      if (res.code == 200) {
+        return JSON.parse(res.data).data.rcket_girls
+      }
+    })
+  }
+  // 获取吃鸡五分钟数据
+  getChijiList(){
+    let url = `/api/chiji/chijiAllNum`;
+    let chijiData = [];
+    return this.requestService.queryServer({ url: url, method: 'get' }, {}).then(res => {
+      if (res.code == 200) {
+        res.msg.forEach(element => {
+          chijiData.push({
+            data: JSON.parse(element.data).data,
+            createAt: element.createdAt
+          })
+        });
+      }
+      return chijiData
     })
   }
 

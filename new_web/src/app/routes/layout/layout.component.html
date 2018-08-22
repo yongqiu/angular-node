@@ -1,4 +1,4 @@
-<ul nz-menu [nzMode]="'horizontal'" class="header">
+<ul nz-menu [nzMode]="'horizontal'" class="header" (window:resize)="windowResize()">
   <!-- <li nz-menu-item [nzSelected]="tablesService.currentMenu == 1" (click)="routeToQQmusic()"><i class="anticon anticon-mail"></i>数字专辑</li> -->
   <!-- <li nz-menu-item [nzSelected]="tablesService.currentMenu == 2" (click)="routeToTable()"><i class="anticon anticon-mail"></i>数据</li> -->
   <!-- <li nz-menu-item [nzSelected]="tablesService.currentMenu == 3" (click)="routeToCharts()"><i class="anticon anticon-pie-chart"></i>图表</li> -->
@@ -9,6 +9,9 @@
       <li nz-menu-group>
         <ul>
           <li nz-menu-item [nzSelected]="tablesService.currentMenu == 1" (click)="routeToQQmusic()">qq音乐数字专辑</li>
+        </ul>
+        <ul>
+          <li nz-menu-item [nzSelected]="tablesService.currentMenu == 5" (click)="routeTochiji()">刺激战场</li>
         </ul>
       </li>
     </ul>

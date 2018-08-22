@@ -205,6 +205,43 @@ function deleteChijiLines() {
     })
 }
 
+router.get('/chiji/getNowData', function (req, res, next) {
+    // console.log(req.query)
+    var e = request({
+        url: `https://vip.video.qq.com/fcgi-bin/comm_cgi?name=test_rank&cmd=1&_=1534856123160&callback=Zepto1534856122838`,
+        method: 'GET',
+        // headers: { 'Content-Type': 'text/json' }
+    }, function (error, response, body) {
+        var regex = "\\((.+?)\\)";
+        var arr = body.match(regex);
+        var responseData = {
+            code: 200,
+            data: arr[1],
+        }
+
+        res.json(responseData)
+    });
+})
+
+router.get('/chiji/chijiAllNum', function (req, res) {
+    // var id = req.query.id;
+    pool.getConnection(function (err, connection) {
+        connection.query(y_cijizhanchang.queryAll, [15], function (err, result) {
+            if (result) {
+                result = {
+                    code: 200,
+                    msg: result
+                };
+            }
+            // 以json形式，把操作结果返回给前台页面
+            // 释放连接  
+            res.json(result)
+            connection.release();
+        });
+    })
+});
+
+
 router.get('/qqmusic/getNowData', function (req, res, next) {
     // console.log(req.query)
     let param = { "comm": { "g_tk": 5381, "uin": 0, "format": "json", "inCharset": "utf-8", "outCharset": "utf-8", "notice": 0, "platform": "h5", "needNewCode": 1 }, "requestSingerCallList": { "method": "AlbumSingerRankList", "param": { "actid": 279 }, "module": "mall.AlbumCallSvr" }, "requestUserInfo": { "method": "UsrCallInfo", "param": { "actid": 279 }, "module": "mall.AlbumCallSvr" } }

@@ -14,16 +14,25 @@ export class LayoutComponent implements OnInit {
       //do something
       // console.log(event)
     });
+
+
+    // if(width < 800){
+    //   this.tablesService.tableHeight = '280px';
+    // }else{
+    //   this.tablesService.tableHeight = 'auto'
+    // }
   }
 
   ngOnInit() {
-
+    this.windowResize()
   }
   windowResize() {
-    console.log(123);
+    let width = window.document.body.offsetWidth;
+    let heigth = window.document.body.offsetHeight - 300;
+    this.tablesService.tableHeight = heigth + 'px';
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     // let contentWidth = this.content.nativeElement.clientWidth;
     // if(contentWidth > 800){
     //   this.tablesService.tableHeight = 'auto'
@@ -36,6 +45,10 @@ export class LayoutComponent implements OnInit {
 
   routeToHot() {
     this.router.navigate(["hot-search"]);
+  }
+
+  routeTochiji() {
+    this.router.navigate(["chiji"]);
   }
 
   routeToTable() {

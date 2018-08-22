@@ -4,10 +4,11 @@ export const menuNum = {
     qqmusic: 1,
     weiboData: 2,
     charts: 3,
-    hotSearch: 4
+    hotSearch: 4,
+    chiji: 5,
 }
 
-export const hotSearch = [{
+export const userList = [{
     userName: '杨超越',
 }, {
     userName: '孟美岐',
