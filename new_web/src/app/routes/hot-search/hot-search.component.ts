@@ -11,6 +11,7 @@ export class HotSearchComponent implements OnInit {
   pageIndex: number = 1;
   showTotal: boolean = false;
   currentUser: any = '杨超越';
+  userList: any = [];
   constructor(private activatedRoute: ActivatedRoute, public tablesService: TablesService) {
     this.tablesService.currentMenu = menuNum.hotSearch;
     this.activatedRoute.queryParams.subscribe(
@@ -24,7 +25,31 @@ export class HotSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.userList = [{
+      userName: '杨超越',
+    }, {
+      userName: '孟美岐',
+    }, {
+      userName: '吴宣仪',
+    }, {
+      userName: '段奥娟',
+    }, {
+      userName: 'yamy',
+    }, {
+      userName: '赖美云',
+    }, {
+      userName: '紫宁',
+    }, {
+      userName: 'sunnee',
+    }, {
+      userName: '李紫婷',
+    }, {
+      userName: '傅菁',
+    }, {
+      userName: '徐梦洁',
+    }, {
+      userName: '火箭少女'
+    }]
   }
 
   changeUser() {
@@ -39,11 +64,11 @@ export class HotSearchComponent implements OnInit {
     let scrollHeight = e.target.scrollHeight;
     let check = scrollHeight - clientHeight;
 
-    if (scrollTop == check) {    
+    if (scrollTop == check) {
       this.tablesService.searchLoading = true;
       this.pageIndex = this.pageIndex + 1;
       if (this.pageIndex <= this.tablesService.searchTotalPage) {
-        
+
         this.tablesService.getHotSearch(this.pageIndex, this.currentUser)
       } else {
         this.tablesService.searchLoading = false;

@@ -28,7 +28,7 @@
   <li nz-menu-item [nzSelected]="tablesService.currentMenu == 4" (click)="routeToHot()">
     <i class="anticon anticon-rocket"></i>热搜</li>
 </ul>
-<div class="content">
+<div class="content" #content>
   <div class="scroll-panel">
     <router-outlet></router-outlet>
   </div>

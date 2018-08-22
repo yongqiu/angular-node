@@ -10,7 +10,7 @@
     <nz-tabset>
       <nz-tab nzTitle="超话">
         <p>*当前成员一个月内数据，表格可向左拖动查看</p>
-        <nz-table #nzTable0 [nzData]="tablesService.suerData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'530px',y: '300px' }"
+        <nz-table #nzTable0 [nzData]="tablesService.suerData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'530px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead>
             <tr>
@@ -34,7 +34,7 @@
       </nz-tab>
       <nz-tab nzTitle="阅读">
         <p>*当前成员一个月内数据，表格可向左拖动查看</p>
-        <nz-table #nzTable1 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
+        <nz-table #nzTable1 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead>
             <tr>
@@ -58,7 +58,7 @@
       </nz-tab>
       <nz-tab nzTitle="互动">
         <p>*当前成员一个月内数据，表格可向左拖动查看</p>
-        <nz-table #nzTable2 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'800px',y: '300px' }"
+        <nz-table #nzTable2 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'800px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead>
             <tr>
@@ -86,7 +86,7 @@
       </nz-tab>
       <nz-tab nzTitle="爱慕值">
         <p>*当前成员一个月内数据，表格可向左拖动查看</p>
-        <nz-table #nzTable3 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: '300px' }"
+        <nz-table #nzTable3 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead>
             <tr>

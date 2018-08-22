@@ -1,9 +1,9 @@
 <div class="hot-list">
   <div class="select-box">
     <nz-select class="userSelect" style="width: 120px;" [(ngModel)]="currentUser" (ngModelChange)="changeUser()">
-      <nz-option nzValue="{{user.userName}}" nzLabel="{{user.userName}}" *ngFor="let user of tablesService.userList"></nz-option>
+      <nz-option nzValue="{{user.userName}}" nzLabel="{{user.userName}}" *ngFor="let user of userList"></nz-option>
     </nz-select>
-    <p class="total">相关热搜共：{{tablesService.searchTotal}}条</p>
+    <p class="total">*相关热搜共：{{tablesService.searchTotal}}条</p>
     <p class="tips">*实时热搜榜每10分钟更新</p>
   </div>
   <div class="result" (scroll)="scrollHandler($event)">

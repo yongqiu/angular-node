@@ -15,21 +15,25 @@ export class QqmusicComponent implements OnInit {
   names: any = [];
   seriesData: any = [];
   dates: any = [];
-  tableData: any = [];
-  tableHeight :number = 300;
+  tableHeight: number = 300;
+  timeRule: string = '1';
+  totalArray: any = [];
+  loading: boolean = true;
   constructor(public tablesService: TablesService) {
     this.tablesService.currentMenu = menuNum.qqmusic;
   }
 
+  refresh() {
+    this.getAllMusic(this.timeRule);
+  }
+
   ngOnInit() {
-    this.getAllMusic();
-    for (let i = 0; i < 10; i++) {
-      this.dataSet.push({
-        name: `Edward King ${i}`,
-        age: 32,
-        address: `London, Park Lane no. ${i}`
-      });
-    }
+    this.getAllMusic(this.timeRule);
+  }
+
+  changeTimeRule() {
+    let timeRule = this.timeRule;
+    this.getAllMusic(timeRule);
   }
 
   renderChart() {
@@ -57,8 +61,14 @@ export class QqmusicComponent implements OnInit {
     };
   }
 
-  async getAllMusic() {
-    let data = await this.tablesService.getAllMusicNum();
+  async getAllMusic(timeRule: string) {
+    this.loading = true;
+    let data = [];
+    if (timeRule == '1') {
+      data = await this.tablesService.getAllMusicNum();
+    } else {
+      data = await this.tablesService.getAllMusicNumByMinute();
+    }
     data.reverse();
     this.userList = [];
     this.seriesData = [];
@@ -75,15 +85,25 @@ export class QqmusicComponent implements OnInit {
       user.musicNum = [];
       data.forEach(element => {
         if (element.singerid == user.singerid) {
+          let createdAt;
+          if (timeRule == '1') {
+            createdAt = moment.unix(element.createdAt).format('DD日HH点')
+          } else {
+            createdAt = moment.unix(element.createdAt).format('HH:mm')
+          }
           user.musicNum.push({
             singer_call_num: element.singer_call_num,
-            createdAt: moment.unix(element.createdAt).format('DD日HH点')
+            createdAt: createdAt
           })
         }
       });
     });
+    
     this.initChartData();
     this.initTableData();
+    setTimeout(() => {
+      this.loading = false;
+    }, 500);
   }
 
   initChartData() {
@@ -113,7 +133,6 @@ export class QqmusicComponent implements OnInit {
 
   initTableData() {
     let tableData = this.userList;
-    this.tableData = [];
     // 表格数据
     this.tablesService.getCurrentMusicNum().then(res => {
       let ranklist = res.requestSingerCallList.data.ranklist;
@@ -127,17 +146,17 @@ export class QqmusicComponent implements OnInit {
         })
         element.musicNum.reverse()
       });
+      // 按照从小到大排序
       this.dealArray(tableData)
-
-
-      this.tableData = tableData;
+      // 获取差值
+      this.addBetween(tableData)
     })
   }
 
-  dealArray(tableData){
+  dealArray(tableData) {
     var max;
     for (var i = 0; i < tableData.length; i++) {
-      　　　　　　　　　　//外层循环一次，就拿arr[i] 和 内层循环arr.legend次的 arr[j] 做对比
+      //外层循环一次，就拿arr[i] 和 内层循环arr.legend次的 arr[j] 做对比
       for (var j = i; j < tableData.length; j++) {
         if (tableData[i].musicNum[0].singer_call_num < tableData[j].musicNum[0].singer_call_num) {
           //如果arr[j]大就把此时的值赋值给最大值变量max
@@ -147,6 +166,31 @@ export class QqmusicComponent implements OnInit {
         }
       }
     }
+  }
+
+  addBetween(tableData) {
+    let totalArray = [];
+    for (let i = 0; i < tableData.length; i++) {
+      const element = tableData[i];
+      if (i == tableData.length - 1) {
+        totalArray.push(element)
+      } else {
+        var next = tableData[i + 1];
+        var between = {
+          userName: '差值',
+          musicNum: []
+        }
+        element.musicNum.forEach((item, index) => {
+          between.musicNum.push({
+            singer_call_num: item.singer_call_num - next.musicNum[index].singer_call_num,
+            createdAt: item.createdAt
+          })
+        });
+        totalArray.push(element);
+        totalArray.push(between)
+      }
+    }
+    this.totalArray = totalArray;
   }
 
 }

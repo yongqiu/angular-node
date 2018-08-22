@@ -22,7 +22,7 @@ var app = express();
 //设置请求头
 var allowCrossDomain = function (req, res, next) {
     // Website you wish to allow to connect
-    // res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
@@ -67,7 +67,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 * 配置请求路由
 */
 app.use('/api', require('./routers/api'));  //前端页面的api 路由
-app.use('/admin/api', require('./routers/api_admin')); // admin的api路由
+app.use('/api/weibo', require('./routers/api_weibo')); // admin的api路由
 // app.use('/', require('./routers/main'));    //前端展示页面路由
 // app.use('/admin', require('./routers/admin'));    //后端展示页面路由
 var server = app.listen(3000, function () {

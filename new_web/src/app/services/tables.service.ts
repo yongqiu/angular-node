@@ -17,6 +17,8 @@ export class TablesService {
   // 成员
   userList: any = [];
 
+  tableHeight: any = '300px';
+
   currentMenu: number = 1;
   constructor(private requestService: RequestService) {
     this.userList = [{
@@ -92,7 +94,7 @@ export class TablesService {
         super_rank: element.super_rank,
         super_fans: element.super_fans,
         super_read: element.super_read,
-        doki_fans: `${parseInt((element.doki_fans/10000).toString())}万`
+        doki_fans: `${parseInt((element.doki_fans / 10000).toString())}万`
       })
     });
     this.suerData = suerData;
@@ -100,7 +102,7 @@ export class TablesService {
 
   public async getHotSearch(page: number, name: string) {
     let encode = encodeURI(name)
-    let hotUrl = `/api/getHotSearch`
+    let hotUrl = `/api/weibo/getHotSearch`
     let res = await this.requestService.queryServer({ url: hotUrl, method: 'get' }, { page: page, name: encode });
     let data = JSON.parse(res.data);
     this.searchTotal = data.total;
@@ -134,6 +136,13 @@ export class TablesService {
   // 获取最后80条信息
   getAllMusicNum() {
     let url = `/api/qqmusic/getAlluserNum`
+    return this.requestService.queryServer({ url: url, method: 'get' }, {}).then(res => {
+      return res.msg;
+    })
+  }
+
+  getAllMusicNumByMinute() {
+    let url = `/api/qqmusic/getUserNumByMinute`
     return this.requestService.queryServer({ url: url, method: 'get' }, {}).then(res => {
       return res.msg;
     })

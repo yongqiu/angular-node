@@ -1,20 +1,31 @@
 <div class="content">
   <div class="inner-content">
     <p class="page-title">qq音乐数字专辑销量</p>
+    <p style="margin-bottom: 10px;text-align: center">
+      <nz-radio-group [(ngModel)]="timeRule" (ngModelChange)="changeTimeRule()">
+        <label nz-radio nzValue="1">每小时记录</label>
+        <label nz-radio nzValue="2">每五分钟记录</label>
+      </nz-radio-group>
+      <button nz-button nzType="primary" [nzSize]="'small'" (click)="refresh()">
+        <i class="anticon anticon-reload"></i>刷新</button>
+    </p>
     <nz-tabset [nzSize]="'small'">
       <nz-tab nzTitle="分时记录表">
-        <p class="tips">*每小时记录一次，第一列为当前时刻数据</p>
-        <div class="table" *ngIf="tableData[0] && tableData[0].musicNum">
-          <nz-table [nzBordered]="true" #nzTable [nzFrontPagination]="false" [nzShowPagination]="false" [nzData]="dataSet" [nzPageSize]="10"
-            [nzScroll]="{ x:'1300px',y: tableHeight+'px'}">
+        <p class="spinBox">
+          <nz-spin *ngIf="loading"></nz-spin>
+        </p>
+        <!-- <p class="tips">*每小时记录一次，第一列为当前时刻数据</p> -->
+        <div class="table" *ngIf="totalArray[0] && totalArray[0].musicNum && !loading">
+          <nz-table class="musicTable" [nzBordered]="true" #nzTable [nzFrontPagination]="false" [nzShowPagination]="false" [nzData]="totalArray" [nzPageSize]="10"
+            [nzScroll]="{ x:'1650px',y: tablesService.tableHeight}">
             <thead>
               <tr>
-                <th nzWidth="60px" nzLeft="0px">姓名</th>
-                <th nzWidth="80px" *ngFor="let num of tableData[0].musicNum">{{num.createdAt}}</th>
+                <th nzWidth="65px" nzLeft="0px">姓名</th>
+                <th nzWidth="80px" *ngFor="let num of totalArray[0].musicNum">{{num.createdAt}}</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let data of tableData">
+              <tr *ngFor="let data of totalArray">
                 <td nzLeft="0px">{{data.userName}}</td>
                 <td *ngFor="let num of data.musicNum">{{num.singer_call_num}}</td>
               </tr>
@@ -23,8 +34,11 @@
         </div>
       </nz-tab>
       <nz-tab nzTitle="走势图">
-        <p>*点击人名筛选，该表为每小时销售量增长曲线</p>
-        <div style="height: 300px;" echarts [options]="chartOptions" class="demo-chart"></div>
+        <p>*点击人名筛选，该表为销售量增长曲线</p>
+        <p class="spinBox">
+          <nz-spin *ngIf="loading"></nz-spin>
+        </p>
+        <div *ngIf="!loading" style="height: 300px;" echarts [options]="chartOptions" class="demo-chart"></div>
 
 
       </nz-tab>
