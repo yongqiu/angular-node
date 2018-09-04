@@ -4,6 +4,9 @@ var y_weibodata = {
     queryAllUser: "SELECT * FROM y_weibodata where userId = ? ORDER BY createdAt DESC LIMIT 12",
     queryUserByDate: "SELECT * FROM ycydata.y_weibodata where createdAt BETWEEN '1535825100' AND ? ORDER BY createdAt",
     // 删除最老的n条数据
-    deletetenLines: 'DELETE FROM y_weibodata ORDER BY id ASC LIMIT 1'
+    deletetenLines: 'DELETE FROM y_weibodata ORDER BY id ASC LIMIT 1',
+
+    insertLove: 'INSERT INTO y_lovedata(data,createdAt) VALUES(?,?)',
+    queryLove: 'SELECT * FROM y_lovedata ORDER BY createdAt DESC LIMIT 1',
 };
 module.exports = y_weibodata;

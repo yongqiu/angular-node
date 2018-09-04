@@ -5,15 +5,18 @@
         <i class="anticon anticon-reload"></i>刷新</button>
     </p>
     <p class="tips">*当前页面为实时数据, 数据获取时间：{{currentTime}}</p>
+    <p class="tips tips2">*今日送花数量统计开始时间为每天00:00</p>
     <p class="spinBox" *ngIf="loading">
       <nz-spin></nz-spin>
     </p>
     <div class="table-panel" *ngIf="userList.length > 0 && !loading">
-      <nz-table #nzTable1 [nzData]="userList" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'550px',y: tablesService.tableHeight }"
+      <nz-table #nzTable1 [nzData]="userList" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'700px',y: tablesService.tableHeight }"
         [nzBordered]="true">
         <thead>
           <tr>
             <th nzWidth="30px" nzLeft="0px">姓名</th>
+            <th nzWidth="40px">今日送花数</th>
+            <th nzWidth="40px">今日爱慕值</th>
             <th nzWidth="40px">本月送花数</th>
             <th nzWidth="40px">本月爱慕值</th>
             <th nzWidth="40px">总花数</th>
@@ -23,8 +26,10 @@
         <tbody>
           <tr *ngFor="let data of userList">
             <td nzLeft="0px">{{data.userName}}</td>
-            <td>{{data.love}}</td>
-            <td>{{data.val}}</td>
+            <td>{{data.today_love}}</td>
+            <td>{{data.today_val}}</td>
+            <td>{{data.month_love}}</td>
+            <td>{{data.month_val}}</td>
             <td>{{data.total_love}}</td>
             <td>{{data.total_val}}</td>
           </tr>

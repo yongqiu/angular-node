@@ -17,4 +17,8 @@ export class WeiboService {
     return JSON.parse(res.data);
   }
 
+  async getStartFlower(){
+    let res = await this.requestService.queryServer({ url: `/api/weibo/latest`, method: 'get' }, {});
+    return JSON.parse(res.data[0].data);
+  }
 }

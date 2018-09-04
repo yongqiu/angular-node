@@ -36,7 +36,7 @@
       </nz-tab>
       <nz-tab nzTitle="互动">
         <p class="tips">*数据每天凌晨02:05更新</p>
-        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项数据排序</p>
+        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable1 [nzData]="display_interact" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'500px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_interact, display_interact)" nzSingleSort>
