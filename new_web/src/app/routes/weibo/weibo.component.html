@@ -1,4 +1,4 @@
-<div class="table-content yesterday">
+<div class="table-content">
   <div class="tools">
     <P class="title">YcY数据站-{{currentDate}}数据</P>
   </div>
@@ -10,16 +10,16 @@
       <nz-tab nzTitle="总分">
         <p class="tips">*数据每天凌晨02:05更新，当前数据为{{currentDate}}数据</p>
 
-        <nz-table #nzTable1 [nzData]="userList" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'650px',y: tablesService.tableHeight }"
+        <nz-table #nzTable1 [nzData]="userList" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'450px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead>
             <tr>
-              <th nzWidth="30px" nzLeft="0px">姓名</th>
+              <th nzWidth="40px" nzLeft="0px">姓名</th>
               <th nzWidth="40px"> 总分</th>
-              <th nzWidth="40px"> 互动得分</th>
-              <th nzWidth="40px"> 阅读得分</th>
-              <th nzWidth="40px"> 爱慕值得分</th>
-              <th nzWidth="40px"> 影响力得分</th>
+              <th nzWidth="40px"> 互动</th>
+              <th nzWidth="40px"> 阅读</th>
+              <th nzWidth="40px"> 爱慕值</th>
+              <th nzWidth="40px"> 影响力</th>
             </tr>
           </thead>
           <tbody>
@@ -36,17 +36,17 @@
       </nz-tab>
       <nz-tab nzTitle="互动">
         <p class="tips">*数据每天凌晨02:05更新</p>
-        <p class="tips">*默认按照总分由高到低排序，点击<i class="anticon anticon-caret-down"></i><i class="anticon anticon-caret-up"></i>进行单项排序</p>
-        <nz-table #nzTable1 [nzData]="display_interact" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'800px',y: tablesService.tableHeight }"
+        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项数据排序</p>
+        <nz-table #nzTable1 [nzData]="display_interact" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'500px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_interact, display_interact)" nzSingleSort>
             <tr>
               <th nzWidth="30px" nzLeft="0px">姓名</th>
-              <th nzWidth="40px" nzShowSort nzSortKey="interactVal"> 互动分数</th>
+              <th nzWidth="40px" nzShowSort nzSortKey="interactVal"> 分数</th>
               <th nzWidth="40px" nzShowSort nzSortKey="interact_total"> 总互动</th>
-              <th nzWidth="40px" nzShowSort nzSortKey="interact_comment"> 评论互动</th>
-              <th nzWidth="40px" nzShowSort nzSortKey="interact_repost"> 转发互动</th>
-              <th nzWidth="40px" nzShowSort nzSortKey="interact_story"> 故事互动</th>
+              <th nzWidth="40px" nzShowSort nzSortKey="interact_comment"> 评论</th>
+              <th nzWidth="40px" nzShowSort nzSortKey="interact_repost"> 转发</th>
+              <th nzWidth="40px" nzShowSort nzSortKey="interact_story"> 故事</th>
             </tr>
           </thead>
           <tbody>
@@ -63,8 +63,8 @@
       </nz-tab>
       <nz-tab nzTitle="阅读">
         <p class="tips">*数据每天凌晨02:05更新</p>
-        <p class="tips">*默认按照总分由高到低排序，点击<i class="anticon anticon-caret-down"></i><i class="anticon anticon-caret-up"></i>进行单项排序</p>
-        <nz-table #nzTable2 [nzData]="display_read" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'400px',y: tablesService.tableHeight }"
+        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
+        <nz-table #nzTable2 [nzData]="display_read" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'420px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_read, display_read)" nzSingleSort>
             <tr>
@@ -86,7 +86,7 @@
       </nz-tab>
       <nz-tab nzTitle="爱慕值">
         <p class="tips">*数据每天凌晨02:05更新</p>
-        <p class="tips">*默认按照总分由高到低排序，点击<i class="anticon anticon-caret-down"></i><i class="anticon anticon-caret-up"></i>进行单项排序</p>
+        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable3 [nzData]="display_love" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_love, display_love)" nzSingleSort>
@@ -109,9 +109,9 @@
           </tbody>
         </nz-table>
       </nz-tab>
-      <nz-tab nzTitle="社会影响力">
+      <nz-tab nzTitle="影响力">
         <p class="tips">*数据每天凌晨02:05更新</p>
-        <p class="tips">*默认按照总分由高到低排序，点击<i class="anticon anticon-caret-down"></i><i class="anticon anticon-caret-up"></i>进行单项排序</p>
+        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable0 [nzData]="display_social" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_social, display_social)" nzSingleSort>

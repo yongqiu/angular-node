@@ -13,14 +13,53 @@ p.page-title{
     font-size: 16px;
     margin-bottom: 5px;
 }
-p.tips{
-    margin: 0;
-    padding: 10px;
-    font-size: 12px;
-}
+
 
 .spinBox{
     text-align: center;
     margin: 20px;
+}
+
+.table-content{
+    height: 100%;
+    padding: 50px 20px 20px 20px;
+    position: relative;
+    p.tips{
+        margin: 0;
+        padding: 10px;
+        font-size: 12px;
+    }
+    p.tips2{
+        padding: 0px 10px 10px 10px;
+    }
+    .ant-tabs-bar{
+        margin: 0px;
+    }
+    .tools{
+        .weekSelect{
+            position: absolute;
+            top: 20px;
+        }
+        .userSelect{
+            position: absolute;
+            top: 12px;
+            left: 20px;
+        }
+    }
+    .table-panel{
+        height: 100%;
+        tr th{
+            color: #1890ff;
+        }
+        .ant-table-wrapper{
+            border: 1px solid #1890ff;
+        }
+        .ant-table-tbody>tr>td, .ant-table-thead>tr>th {
+            padding: 7px;
+            word-break: break-word;
+            text-align: center;
+        }
+    }
+    
 }
 

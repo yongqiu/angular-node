@@ -13,7 +13,6 @@
         font-weight: bold;
     }
     p.tips{
-        padding: 0px 10px 10px 10px;
         .anticon-caret-down{
             position: relative;
         }
@@ -32,33 +31,4 @@
             left: 20px;
         }
     }
-}
-
-::ng-deep .table-content{
-        .ant-tabs-nav .ant-tabs-tab {
-            margin: 0 20px 0 0;
-            padding: 12px 5px;
-        }
-        .table-panel{
-            height: 100%;
-            tr th{
-                color: #1890ff;
-            }
-            .ant-table-wrapper{
-                border: 1px solid #1890ff;
-            }
-            .ant-table-tbody>tr>td, .ant-table-thead>tr>th {
-                padding: 7px;
-                word-break: break-word;
-                text-align: center;
-            }
-            .ant-table-column-sorter{
-              height: 20px;
-            }
-            .ant-table-column-sorter-up{
-              height: 12px;
-            }
-        }
-        
-        
 }
