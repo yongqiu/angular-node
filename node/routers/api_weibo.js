@@ -21,12 +21,11 @@ function scheduleCronstyle() {
   let minuteRule = '00 * * * * *'
   schedule.scheduleJob(hourRule, function () {
     console.log('scheduleCronstyle:' + new Date());
-    this.loopUser()
+    loopUser()
   });
 }
 
 scheduleCronstyle()
-
 
 var banjiaUser = [{
   userName: '杨超越',
@@ -102,17 +101,48 @@ router.get('/getHotSearch', function (req, res, next) {
   });
 })
 
+
+router.get('/loveCurrent', function (req, res, next) {
+  // console.log(req.query)
+  superagent.get(`https://m.weibo.cn/status/4280508277494385?`)
+    .end(function (err, obj) {
+      //获取页面文档数据
+      var content = obj.text;
+      //cheerio也就是nodejs下的jQuery  将整个文档包装成一个集合，定义一个变量$接收
+      var $ = cheerio.load(content);
+      script = $('body script').html();
+      let data = [{
+        userName: '杨超越',
+        key: 3,
+        love: script.match(/杨超越已收到(\S*)朵花/)[1]
+      }, {
+        userName: '赖美云',
+        key: 6,
+        love: script.match(/赖美云已收到(\S*)朵花/)[1]
+      }, {
+        userName: '紫宁',
+        key: 7,
+        love: script.match(/紫宁已收到(\S*)朵花/)[1]
+      }, {
+        userName: '杨芸晴',
+        key: 8,
+        love: script.match(/Sunnee已收到(\S*)朵花/)[1]
+      }]
+      res.json({ data: JSON.stringify(data) })
+    })
+})
 router.get('/getAllUserDayData', function (req, res) {
+  let weekFliter = req.query.weekFliter;
   // var id = req.query.id;
   pool.getConnection(function (err, connection) {
-    connection.query(y_weibodata.queryAll, [5], function (err, result) {
+    connection.query(y_weibodata.queryAll, [4], function (err, result) {
       if (result) {
         result = {
           code: 200,
           msg: result
         };
       }
-      console.log(err)
+      // console.log(err)
       // 以json形式，把操作结果返回给前台页面
       // 释放连接  
       res.json(result)
@@ -120,6 +150,24 @@ router.get('/getAllUserDayData', function (req, res) {
     });
   })
 });
+
+router.get('/getUserInfo/month', function (req, res) {
+  pool.getConnection(function (err, connection) {
+    connection.query(y_weibodata.queryUserByDate, [4], function (err, result) {
+      if (result) {
+        result = {
+          code: 200,
+          msg: result
+        };
+      }
+      // console.log(err)
+      // 以json形式，把操作结果返回给前台页面
+      // 释放连接  
+      res.json(result)
+      connection.release();
+    });
+  })
+})
 
 function loopUser() {
   let sids = [{ name: '杨超越', sid: '5644764907' }, { name: '紫宁', sid: '2335410541' }, { name: '赖美云', sid: '5541182601' }, { name: '杨芸晴', sid: '2485664410' }, { name: '摩登兄弟', sid: '5456865382' }]

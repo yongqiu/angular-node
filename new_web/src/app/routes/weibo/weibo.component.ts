@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WeiboService } from '../../services/weibo.service';
 import { TablesService } from '../../services/tables.service';
+import * as moment from 'moment';
+import { menuNum } from '../../config';
 
 @Component({
   selector: 'app-weibo',
@@ -8,13 +10,7 @@ import { TablesService } from '../../services/tables.service';
   styleUrls: ['./weibo.component.scss']
 })
 export class WeiboComponent implements OnInit {
-  userList: any = [
-    { name: '杨超越', sid: '5644764907' },
-    { name: '紫宁', sid: '2335410541' },
-    { name: '赖美云', sid: '5541182601' },
-    { name: '杨芸晴', sid: '2485664410' },
-    { name: '摩登兄弟', sid: '5456865382' }
-  ]
+  userList: any = [];
   loading: boolean = true;
   sortName = null;
   sortValue = null;
@@ -27,19 +23,35 @@ export class WeiboComponent implements OnInit {
   display_love: any = [];
   display_read: any = [];
   display_social: any = [];
-  constructor(private weiboService: WeiboService, private tablesService: TablesService) { }
+  currentDate: string;
+  constructor(private weiboService: WeiboService, private tablesService: TablesService) {
+    this.tablesService.currentMenu = menuNum.weibo;
+  }
 
   ngOnInit() {
     this.getWeiboAllUserDayData()
+
   }
 
   async getWeiboAllUserDayData() {
-    let res = await this.weiboService.getWeiboAllUserDayData()
+    let userList = await this.weiboService.getWeiboAllUserDayData()
+    this.currentDate = moment.unix(userList[0].createdAt).subtract(1, 'days').format('MM月DD日');
+    this.dealArray(userList)
+    let unix = moment.unix(userList[0].createdAt)
+    console.log(unix)
     this.weibo_interact = [];
     this.weibo_read = [];
     this.weibo_love = [];
     this.weibo_social = [];
-    res.forEach(element => {
+    userList.forEach(element => {
+      this.userList.push({
+        name: element.userName,
+        totalVal: element.totalVal,
+        interactVal: JSON.parse(element.weibo_interact).interactVal,
+        readVal: JSON.parse(element.weibo_read).readVal,
+        loveVal: JSON.parse(element.weibo_love).loveVal,
+        socialVal: JSON.parse(element.weibo_social).socialVal
+      })
       this.weibo_interact.push({
         name: element.userName,
         interactVal: JSON.parse(element.weibo_interact).interactVal,
@@ -87,6 +99,21 @@ export class WeiboComponent implements OnInit {
       display_data = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     } else {
       display_data = data;
+    }
+  }
+
+  dealArray(tableData) {
+    var max;
+    for (var i = 0; i < tableData.length; i++) {
+      //外层循环一次，就拿arr[i] 和 内层循环arr.legend次的 arr[j] 做对比
+      for (var j = i; j < tableData.length; j++) {
+        if (tableData[i].totalVal < tableData[j].totalVal) {
+          //如果arr[j]大就把此时的值赋值给最大值变量max
+          max = tableData[j];
+          tableData[j] = tableData[i];
+          tableData[i] = max;
+        }
+      }
     }
   }
 

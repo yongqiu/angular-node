@@ -5,7 +5,7 @@
     </nz-select>
     <P class="title">所在榜单：{{tablesService.weibo_title}}</P>
   </div>
-  
+
   <div class="table-panel">
     <nz-tabset>
       <nz-tab nzTitle="阅读">
@@ -84,6 +84,32 @@
               <td>{{data.weibo_love.each}}</td>
               <td>{{data.weibo_love.total_day}}</td>
               <td>{{data.weibo_love.total_week}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-tab>
+      <nz-tab nzTitle="影响力">
+        <p class="tips">*当前成员一个月内数据，表格可向左拖动查看</p>
+        <nz-table #nzTable4 [nzData]="tablesService.weiboData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
+          [nzBordered]="true">
+          <thead>
+            <tr>
+              <th nzWidth="30px" nzLeft="0px">日期</th>
+              <th nzWidth="40px"> 昨日排名</th>
+              <th nzWidth="40px"> 影响力总</th>
+              <th nzWidth="40px"> 提及阅读</th>
+              <th nzWidth="40px"> 搜索量</th>
+              <th nzWidth="40px"> 昨日评分</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of nzTable4.data">
+              <td nzLeft="0px">{{data.create_date}}</td>
+              <td>{{data.weibo_inf.rank_day}}</td>
+              <td>{{data.weibo_inf.mention_search}}</td>
+              <td>{{data.weibo_inf.mention}}</td>
+              <td>{{data.weibo_inf.search}}</td>
+              <td>{{data.weibo_inf.total_day}}</td>
             </tr>
           </tbody>
         </nz-table>

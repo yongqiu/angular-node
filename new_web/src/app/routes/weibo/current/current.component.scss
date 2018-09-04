@@ -1,0 +1,46 @@
+p.title{
+    color: #1890fc;
+    font-size: 20px;
+    top: 12px;
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+::ng-deep .table-content{
+    height: 100%;
+    padding: 50px 20px 20px 20px;
+    position: relative;
+    .ant-tabs-nav .ant-tabs-tab {
+        margin: 0 20px 0 0;
+        padding: 12px 15px;
+    }
+
+    .tools{
+        .weekSelect{
+            position: absolute;
+            top: 20px;
+        }
+        .userSelect{
+            position: absolute;
+            top: 12px;
+            left: 20px;
+        }
+    }
+    .table-panel{
+        height: 100%;
+        tr th{
+            color: #1890ff;
+        }
+        .ant-table-wrapper{
+            border: 1px solid #1890ff;
+        }
+        .ant-table-tbody>tr>td, .ant-table-thead>tr>th {
+            padding: 7px;
+            word-break: break-word;
+            text-align: center;
+        }
+    }
+    
+}

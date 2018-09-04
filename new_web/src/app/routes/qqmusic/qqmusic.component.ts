@@ -220,12 +220,12 @@ export class QqmusicComponent implements OnInit {
   }
 
   // 每一秒更新时间差
-  ngAfterViewInit() {
-    this.timer = setInterval(() => {
-      this.diff = moment('2018-09-01 00:00').unix() - moment().unix();
+  // ngAfterViewInit() {
+  //   this.timer = setInterval(() => {
+  //     this.diff = moment('2018-09-01 00:00').unix() - moment().unix();
 
-    }, 1000);
-  }
+  //   }, 1000);
+  // }
 
   // 销毁组件时清除定时器
   ngOnDestroy() {

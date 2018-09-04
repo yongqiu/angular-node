@@ -67,4 +67,8 @@ export class LayoutComponent implements OnInit {
   routeToWeiboData(){
     this.router.navigate(["weibo-data"]);
   }
+
+  routeToWeiboCurrent(){
+    this.router.navigate(["weibo-data/current"]);
+  }
 }

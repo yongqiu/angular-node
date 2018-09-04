@@ -72,12 +72,14 @@ export class TablesService {
     let res = await this.requestService.queryServer({ url: `/api/weibo/data`, method: 'get' }, { weekFliter: weekFliter, userNum: userNum });
     let weiboData = [];
     let data = JSON.parse(res.data)
+    console.log(data)
     data.list.forEach(element => {
       weiboData.push({
         create_date: moment.unix(element.create_date).format('MM-DD'),
         weibo_read: element.weibo_read,
         weibo_int: element.weibo_int,
-        weibo_love: element.weibo_love
+        weibo_love: element.weibo_love,
+        weibo_inf: element.weibo_inf
       })
     });
     this.weibo_title = data.list[0].weibo_total.title;

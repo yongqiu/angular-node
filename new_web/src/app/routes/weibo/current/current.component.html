@@ -1,0 +1,39 @@
+<div class="table-content">
+  <div class="inner-content">
+    <p class="title" style="color: #1790ff">YcY数据站-实时爱慕值</p>
+    <p style="margin-bottom: 0px;text-align: center">
+      <button nz-button nzType="primary" [nzSize]="'small'" (click)="refresh()">
+        <i class="anticon anticon-reload"></i>刷新</button>
+    </p>
+    <p class="tips">*当前页面为实时数据, 数据获取时间：{{currentTime}}</p>
+    <p class="spinBox" *ngIf="loading">
+      <nz-spin></nz-spin>
+    </p>
+    <div class="table-panel" *ngIf="userList.length > 0 && !loading">
+      <nz-table #nzTable1 [nzData]="userList" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'550px',y: tablesService.tableHeight }"
+        [nzBordered]="true">
+        <thead>
+          <tr>
+            <th nzWidth="30px" nzLeft="0px">姓名</th>
+            <th nzWidth="40px">本月送花数</th>
+            <th nzWidth="40px">本月爱慕值</th>
+            <th nzWidth="40px">总花数</th>
+            <th nzWidth="40px">总爱慕值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of userList">
+            <td nzLeft="0px">{{data.userName}}</td>
+            <td>{{data.love}}</td>
+            <td>{{data.val}}</td>
+            <td>{{data.total_love}}</td>
+            <td>{{data.total_val}}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+
+  </div>
+
+</div>

@@ -1,14 +1,42 @@
-<div class="table-content">
+<div class="table-content yesterday">
   <div class="tools">
-    <P class="title">所在榜单：{{tablesService.weibo_title}}</P>
+    <P class="title">YcY数据站-{{currentDate}}数据</P>
   </div>
   <p class="spinBox" *ngIf="loading">
     <nz-spin></nz-spin>
   </p>
   <div class="table-panel" *ngIf="!loading">
     <nz-tabset>
+      <nz-tab nzTitle="总分">
+        <p class="tips">*数据每天凌晨02:05更新，当前数据为{{currentDate}}数据</p>
+
+        <nz-table #nzTable1 [nzData]="userList" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'650px',y: tablesService.tableHeight }"
+          [nzBordered]="true">
+          <thead>
+            <tr>
+              <th nzWidth="30px" nzLeft="0px">姓名</th>
+              <th nzWidth="40px"> 总分</th>
+              <th nzWidth="40px"> 互动得分</th>
+              <th nzWidth="40px"> 阅读得分</th>
+              <th nzWidth="40px"> 爱慕值得分</th>
+              <th nzWidth="40px"> 影响力得分</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of userList">
+              <td nzLeft="0px">{{user.name}}</td>
+              <td>{{user.totalVal}}</td>
+              <td>{{user.interactVal}}</td>
+              <td>{{user.readVal}}</td>
+              <td>{{user.loveVal}}</td>
+              <td>{{user.socialVal}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-tab>
       <nz-tab nzTitle="互动">
-        <p class="tips">*当前成员一个月内数据，表格可向左拖动查看</p>
+        <p class="tips">*数据每天凌晨02:05更新</p>
+        <p class="tips">*默认按照总分由高到低排序，点击<i class="anticon anticon-caret-down"></i><i class="anticon anticon-caret-up"></i>进行单项排序</p>
         <nz-table #nzTable1 [nzData]="display_interact" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'800px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_interact, display_interact)" nzSingleSort>
@@ -34,7 +62,8 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="阅读">
-        <p class="tips">*当前成员一个月内数据，表格可向左拖动查看</p>
+        <p class="tips">*数据每天凌晨02:05更新</p>
+        <p class="tips">*默认按照总分由高到低排序，点击<i class="anticon anticon-caret-down"></i><i class="anticon anticon-caret-up"></i>进行单项排序</p>
         <nz-table #nzTable2 [nzData]="display_read" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'400px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_read, display_read)" nzSingleSort>
@@ -56,7 +85,8 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="爱慕值">
-        <p class="tips">*当前成员一个月内数据，表格可向左拖动查看</p>
+        <p class="tips">*数据每天凌晨02:05更新</p>
+        <p class="tips">*默认按照总分由高到低排序，点击<i class="anticon anticon-caret-down"></i><i class="anticon anticon-caret-up"></i>进行单项排序</p>
         <nz-table #nzTable3 [nzData]="display_love" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_love, display_love)" nzSingleSort>
@@ -80,7 +110,8 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="社会影响力">
-        <p class="tips">*当前成员一个月内数据，表格可向左拖动查看</p>
+        <p class="tips">*数据每天凌晨02:05更新</p>
+        <p class="tips">*默认按照总分由高到低排序，点击<i class="anticon anticon-caret-down"></i><i class="anticon anticon-caret-up"></i>进行单项排序</p>
         <nz-table #nzTable0 [nzData]="display_social" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_social, display_social)" nzSingleSort>
@@ -88,7 +119,7 @@
               <th nzWidth="30px" nzLeft="0px">姓名</th>
               <th nzWidth="40px" nzShowSort nzSortKey="socialVal">分数</th>
               <th nzWidth="40px" nzShowSort nzSortKey="social_total">总值</th>
-              <th nzWidth="40px" nzShowSort nzSortKey="social_mention">提及搜索量</th>
+              <th nzWidth="40px" nzShowSort nzSortKey="social_mention">提及阅读</th>
               <th nzWidth="40px" nzShowSort nzSortKey="social_search">搜索量</th>
             </tr>
           </thead>

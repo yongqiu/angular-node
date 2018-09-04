@@ -5,6 +5,9 @@ import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
+  console.log('Welcome to YcY数据站');
+  window.console.log = function () { };
+  window.console.info = function () { };
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)

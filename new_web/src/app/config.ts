@@ -6,6 +6,8 @@ export const menuNum = {
     charts: 3,
     hotSearch: 4,
     chiji: 5,
+    weibo: 6,
+    weibo_current: 7
 }
 
 export const userList = [{
@@ -34,14 +36,18 @@ export const userList = [{
 
 export const banjiaUser = [{
     userName: '杨超越',
-    key: 3
+    key: 3,
+    love: 14500
 }, {
     userName: '赖美云',
-    key: 6
+    key: 6,
+    love: 32832
 }, {
     userName: '紫宁',
-    key: 7
+    key: 7,
+    love: 25458
 }, {
-    userName: 'sunnee',
-    key: 8
+    userName: '杨芸晴',
+    key: 8,
+    love: 74092
 }]
