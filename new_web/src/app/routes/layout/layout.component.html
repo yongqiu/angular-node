@@ -8,10 +8,22 @@
     <ul>
       <li nz-menu-group>
         <ul>
-          <li nz-menu-item [nzSelected]="tablesService.currentMenu == 1" (click)="routeToQQmusic()">qq音乐数字专辑</li>
+          <li nz-menu-item [nzSelected]="tablesService.currentMenu == 1" (click)="routeToQQmusic()">qq音乐销量</li>
         </ul>
         <ul>
           <li nz-menu-item [nzSelected]="tablesService.currentMenu == 5" (click)="routeTochiji()">刺激战场</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li nz-submenu>
+    <span title>
+      <i class="anticon anticon-weibo"></i>搬家</span>
+    <ul>
+      <li nz-menu-group>
+        <ul>
+          <li nz-menu-item [nzSelected]="tablesService.currentMenu == 2" (click)="routeToWeiboData()">数据</li>
+          <li nz-menu-item [nzSelected]="tablesService.currentMenu == 3" (click)="routeToWeiboChart()">图表</li>
         </ul>
       </li>
     </ul>

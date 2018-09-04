@@ -9,6 +9,7 @@ import 'rxjs/add/operator/filter';
 })
 export class LayoutComponent implements OnInit {
   @ViewChild('content') content;
+  topic: string;
   constructor(private router: Router, public tablesService: TablesService, private activatedRoute: ActivatedRoute) {
     this.router.events.filter((event) => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
       //do something
@@ -28,7 +29,7 @@ export class LayoutComponent implements OnInit {
   }
   windowResize() {
     let width = window.document.body.offsetWidth;
-    let heigth = window.document.body.offsetHeight - 300;
+    let heigth = window.document.body.offsetHeight - 260;
     this.tablesService.tableHeight = heigth + 'px';
   }
 
@@ -61,5 +62,9 @@ export class LayoutComponent implements OnInit {
 
   routeToQQmusic() {
     this.router.navigate(["qqmusic"]);
+  }
+
+  routeToWeiboData(){
+    this.router.navigate(["weibo-data"]);
   }
 }

@@ -16,9 +16,24 @@ export class QqmusicComponent implements OnInit {
   seriesData: any = [];
   dates: any = [];
   tableHeight: number = 300;
-  timeRule: string = '1';
+  timeRule: string = '2';
   totalArray: any = [];
   loading: boolean = true;
+  time: string;
+  private _diff: number;
+  private get diff() {
+    return this._diff;
+  }
+  private set diff(val) {
+    this._diff = Math.floor(val);
+    let days = parseInt((val / 60 / 60 / 24).toString(), 10); //计算剩余的天数 
+    let hours = parseInt((val / 60 / 60 % 24).toString(), 10); //计算剩余的小时 
+    let minutes = parseInt((val / 60 % 60).toString(), 10);//计算剩余的分钟 
+    let seconds = parseInt((val % 60).toString(), 10);//计算剩余的秒数 
+    this.time = `倒计时：${days}天${hours}小时${minutes}分钟${seconds}秒`
+  }
+  // 定时器
+  private timer;
   constructor(public tablesService: TablesService) {
     this.tablesService.currentMenu = menuNum.qqmusic;
   }
@@ -29,6 +44,10 @@ export class QqmusicComponent implements OnInit {
 
   ngOnInit() {
     this.getAllMusic(this.timeRule);
+
+    // this.leftTimer()
+
+    // this.leftTimer(2018, 11, 11, 11, 11, 11)
   }
 
   changeTimeRule() {
@@ -38,6 +57,12 @@ export class QqmusicComponent implements OnInit {
 
   renderChart() {
     this.chartOptions = {
+      color: [
+        '#ec5ffd', '#f3a385', '#54a1d5', '#aee4bb', '#86dde1',
+        '#fadb71', '#7f7be3', '#e0beef', '#95706d', '#dc69aa',
+        '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+        '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
+      ],
       tooltip: {
         trigger: 'axis'
       },
@@ -63,6 +88,10 @@ export class QqmusicComponent implements OnInit {
 
   async getAllMusic(timeRule: string) {
     this.loading = true;
+    this.userList = [];
+    this.seriesData = [];
+    this.names = [];
+    this.dates = [];
     let data = [];
     if (timeRule == '1') {
       data = await this.tablesService.getAllMusicNum();
@@ -70,9 +99,6 @@ export class QqmusicComponent implements OnInit {
       data = await this.tablesService.getAllMusicNumByMinute();
     }
     data.reverse();
-    this.userList = [];
-    this.seriesData = [];
-    this.names = [];
     let userList = this.tablesService.userList;
     userList.forEach(element => {
       if (element.singerid) {
@@ -98,7 +124,7 @@ export class QqmusicComponent implements OnInit {
         }
       });
     });
-    
+
     this.initChartData();
     this.initTableData();
     setTimeout(() => {
@@ -123,7 +149,7 @@ export class QqmusicComponent implements OnInit {
       //   element.data.push(num.singer_call_num)
       // });
     });
-    this.dates = [];
+
     this.userList[0].musicNum.forEach(info => {
       this.dates.push(info.createdAt)
     });
@@ -191,6 +217,21 @@ export class QqmusicComponent implements OnInit {
       }
     }
     this.totalArray = totalArray;
+  }
+
+  // 每一秒更新时间差
+  ngAfterViewInit() {
+    this.timer = setInterval(() => {
+      this.diff = moment('2018-09-01 00:00').unix() - moment().unix();
+
+    }, 1000);
+  }
+
+  // 销毁组件时清除定时器
+  ngOnDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 
 }

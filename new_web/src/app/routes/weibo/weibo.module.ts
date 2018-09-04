@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChijiComponent } from './chiji.component';
+import { WeiboComponent } from './weibo.component';
 import { FormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { NgxEchartsModule } from 'ngx-echarts';
 import { RouterModule } from '@angular/router';
+import { WeiboService } from '../../services/weibo.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     NgZorroAntdModule,
-    NgxEchartsModule,
-    RouterModule.forChild([{ path: '', component: ChijiComponent }]),
+    RouterModule.forChild([{ path: '', component: WeiboComponent }]),
   ],
-  declarations: [ChijiComponent]
+  declarations: [WeiboComponent],
+  providers: [WeiboService]
 })
-export class ChijiModule { }
+export class WeiboModule { }

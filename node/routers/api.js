@@ -30,8 +30,8 @@ function getMusicDatabyMinute() {
     schedule.scheduleJob(rule, function () {
         console.log("getMusicDatabyMinute" + new Date());
         // 专辑销量
-        updateMusicRankAndDelete();
-        deleteLines()
+        // updateMusicRankAndDelete();
+        // deleteLines()
         // 吃鸡
         updateChijiData();
         deleteChijiLines();

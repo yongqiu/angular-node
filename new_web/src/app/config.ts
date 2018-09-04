@@ -31,3 +31,17 @@ export const userList = [{
 }, {
     userName: '徐梦洁',
 }]
+
+export const banjiaUser = [{
+    userName: '杨超越',
+    key: 3
+}, {
+    userName: '赖美云',
+    key: 6
+}, {
+    userName: '紫宁',
+    key: 7
+}, {
+    userName: 'sunnee',
+    key: 8
+}]

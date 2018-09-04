@@ -15,7 +15,7 @@ import { LayoutComponent } from './routes/layout/layout.component';
 
 registerLocaleData(zh);
 export const routes = [
-  { path: '', redirectTo: 'qqmusic', pathMatch: 'full' },
+  { path: '', redirectTo: 'table', pathMatch: 'full' },
   // { path: '**', redirectTo: 'table' },
   // {
   //   path: 'hot-search',
@@ -29,7 +29,7 @@ export const routes = [
       { path: 'hot-search', loadChildren: './routes/hot-search/hot-search.module#HotSearchModule' },
       { path: 'charts', loadChildren: './routes/charts/charts.module#ChartsModule' },
       { path: 'qqmusic', loadChildren: './routes/qqmusic/qqmusic.module#QqmusicModule' },
-      { path: 'chiji', loadChildren: './routes/chiji/chiji.module#ChijiModule' },
+      { path: 'weibo-data', loadChildren: './routes/weibo/weibo.module#WeiboModule' },
     ]
   },
   // {

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChijiComponent } from './chiji.component';
+import { WeiboComponent } from './weibo.component';
 
-describe('ChijiComponent', () => {
-  let component: ChijiComponent;
-  let fixture: ComponentFixture<ChijiComponent>;
+describe('WeiboComponent', () => {
+  let component: WeiboComponent;
+  let fixture: ComponentFixture<WeiboComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChijiComponent ]
+      declarations: [ WeiboComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChijiComponent);
+    fixture = TestBed.createComponent(WeiboComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -18,6 +18,7 @@ export class TablesService {
   userList: any = [];
 
   tableHeight: any = '280px';
+  topic: string;
 
   currentMenu: number = 1;
   constructor(private requestService: RequestService) {
@@ -152,6 +153,7 @@ export class TablesService {
     let url = `/api/qqmusic/getNowData`;
     return this.requestService.queryServer({ url: url, method: 'get' }, {}).then(res => {
       if (res.code == 200) {
+        this.topic = '往后余生都是你'
         return JSON.parse(res.data)
       }
     })

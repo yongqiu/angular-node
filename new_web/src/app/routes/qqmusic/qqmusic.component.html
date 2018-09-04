@@ -1,17 +1,18 @@
 <div class="content">
   <div class="inner-content">
-    <p class="page-title">qq音乐数字专辑销量</p>
-    <p style="margin-bottom: 10px;text-align: center">
+    <p class="page-title" style="color: #1790ff">没事，大家很棒，以后的路还长</p>
+    <!-- <p class="page-title" style="color: #ff4d4f">倒计时：{{timer}}</p> -->
+    <p style="margin-bottom: 0px;text-align: center">
       <nz-radio-group [(ngModel)]="timeRule" (ngModelChange)="changeTimeRule()">
-        <label nz-radio nzValue="1">每小时记录</label>
         <label nz-radio nzValue="2">每五分钟记录</label>
+        <label nz-radio nzValue="1">每小时记录</label>
       </nz-radio-group>
       <button nz-button nzType="primary" [nzSize]="'small'" (click)="refresh()">
         <i class="anticon anticon-reload"></i>刷新</button>
     </p>
     <nz-tabset [nzSize]="'small'">
       <nz-tab nzTitle="分时记录表">
-        <p class="tips">*每小时获取一次，最长显示11小时</p>
+        <p class="tips">*第一列为当前时刻数据</p>
         <p class="spinBox"  *ngIf="loading">
           <nz-spin></nz-spin>
         </p>
