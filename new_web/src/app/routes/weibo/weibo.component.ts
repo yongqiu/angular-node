@@ -36,7 +36,7 @@ export class WeiboComponent implements OnInit {
   async getWeiboAllUserDayData() {
     let userList = await this.weiboService.getWeiboAllUserDayData()
     this.currentDate = moment.unix(userList[0].createdAt).subtract(1, 'days').format('MM月DD日');
-    this.dealArray(userList)
+
     let unix = moment.unix(userList[0].createdAt)
     console.log(unix)
     this.weibo_interact = [];
@@ -46,7 +46,7 @@ export class WeiboComponent implements OnInit {
     userList.forEach(element => {
       this.userList.push({
         name: element.userName,
-        totalVal: element.totalVal,
+        score: element.totalVal,
         interactVal: JSON.parse(element.weibo_interact).interactVal,
         readVal: JSON.parse(element.weibo_read).readVal,
         loveVal: JSON.parse(element.weibo_love).loveVal,
@@ -54,7 +54,7 @@ export class WeiboComponent implements OnInit {
       })
       this.weibo_interact.push({
         name: element.userName,
-        interactVal: JSON.parse(element.weibo_interact).interactVal,
+        score: JSON.parse(element.weibo_interact).interactVal,
         interact_repost: JSON.parse(element.weibo_interact).interact_repost,
         interact_comment: JSON.parse(element.weibo_interact).interact_comment,
         interact_total: JSON.parse(element.weibo_interact).interact_total,
@@ -62,29 +62,35 @@ export class WeiboComponent implements OnInit {
       })
       this.weibo_love.push({
         name: element.userName,
-        loveVal: JSON.parse(element.weibo_love).loveVal,
+        score: JSON.parse(element.weibo_love).loveVal,
         love_person: JSON.parse(element.weibo_love).love_person,
         love_times: JSON.parse(element.weibo_love).love_times,
         love_total: JSON.parse(element.weibo_love).love_total
       })
       this.weibo_read.push({
         name: element.userName,
-        readVal: JSON.parse(element.weibo_read).readVal,
+        score: JSON.parse(element.weibo_read).readVal,
         read_blog: JSON.parse(element.weibo_read).read_blog,
         read_total: JSON.parse(element.weibo_read).read_total
       })
       this.weibo_social.push({
         name: element.userName,
-        socialVal: JSON.parse(element.weibo_social).socialVal,
+        score: JSON.parse(element.weibo_social).socialVal,
         social_mention: JSON.parse(element.weibo_social).social_mention,
         social_search: JSON.parse(element.weibo_social).social_search,
         social_total: JSON.parse(element.weibo_social).social_total
       })
-      this.display_interact = this.weibo_interact;
-      this.display_read = this.weibo_read;
-      this.display_love = this.weibo_love;
-      this.display_social = this.weibo_social;
+
     });
+    this.dealArray(this.userList)
+    this.dealArray(this.weibo_interact)
+    this.dealArray(this.weibo_love)
+    this.dealArray(this.weibo_read)
+    this.dealArray(this.weibo_social)
+    this.display_interact = this.weibo_interact;
+    this.display_read = this.weibo_read;
+    this.display_love = this.weibo_love;
+    this.display_social = this.weibo_social;
     this.loading = false;
   }
 
@@ -107,7 +113,7 @@ export class WeiboComponent implements OnInit {
     for (var i = 0; i < tableData.length; i++) {
       //外层循环一次，就拿arr[i] 和 内层循环arr.legend次的 arr[j] 做对比
       for (var j = i; j < tableData.length; j++) {
-        if (tableData[i].totalVal < tableData[j].totalVal) {
+        if (tableData[i].score < tableData[j].score) {
           //如果arr[j]大就把此时的值赋值给最大值变量max
           max = tableData[j];
           tableData[j] = tableData[i];

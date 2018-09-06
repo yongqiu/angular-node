@@ -129,7 +129,7 @@ export class QqmusicComponent implements OnInit {
     this.initTableData();
     setTimeout(() => {
       this.loading = false;
-    }, 500);
+    }, 900);
   }
 
   initChartData() {

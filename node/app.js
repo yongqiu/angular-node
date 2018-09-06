@@ -34,7 +34,7 @@ var allowCrossDomain = function (req, res, next) {
 }
 
 //解决跨域问题
-app.use(allowCrossDomain);
+// app.use(allowCrossDomain);
 //静态文件托管
 // app.use('/public',express.static( __dirname +'/public'))
 //配置应用使用的模板

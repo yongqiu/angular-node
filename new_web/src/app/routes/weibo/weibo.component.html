@@ -23,7 +23,7 @@
           <tbody>
             <tr *ngFor="let user of userList">
               <td nzLeft="0px">{{user.name}}</td>
-              <td>{{user.totalVal}}</td>
+              <td>{{user.score}}</td>
               <td>{{user.interactVal}}</td>
               <td>{{user.readVal}}</td>
               <td>{{user.loveVal}}</td>
@@ -34,7 +34,7 @@
       </nz-tab>
       <nz-tab nzTitle="互动">
         <p class="tips">*数据每天10:05更新</p>
-        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
+        <p class="tips tips2">*默认按照该项分数由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable1 [nzData]="display_interact" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'500px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_interact, display_interact)" nzSingleSort>
@@ -50,7 +50,7 @@
           <tbody>
             <tr *ngFor="let user of weibo_interact">
               <td nzLeft="0px">{{user.name}}</td>
-              <td>{{user.interactVal}}</td>
+              <td>{{user.score}}</td>
               <td>{{user.interact_total}}</td>
               <td>{{user.interact_comment}}</td>
               <td>{{user.interact_repost}}</td>
@@ -61,7 +61,7 @@
       </nz-tab>
       <nz-tab nzTitle="阅读">
         <p class="tips">*数据每天10:05更新</p>
-        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
+        <p class="tips tips2">*默认按照该项分数由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable2 [nzData]="display_read" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'420px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_read, display_read)" nzSingleSort>
@@ -75,7 +75,7 @@
           <tbody>
             <tr *ngFor="let user of weibo_read">
               <td nzLeft="0px">{{user.name}}</td>
-              <td>{{user.readVal}}</td>
+              <td>{{user.score}}</td>
               <td>{{user.read_total}}</td>
               <td>{{user.read_blog}}</td>
             </tr>
@@ -84,7 +84,7 @@
       </nz-tab>
       <nz-tab nzTitle="爱慕值">
         <p class="tips">*数据每天10:05更新</p>
-        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
+        <p class="tips tips2">*默认按照该项分数由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable3 [nzData]="display_love" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_love, display_love)" nzSingleSort>
@@ -99,7 +99,7 @@
           <tbody>
             <tr *ngFor="let user of weibo_love">
               <td nzLeft="0px">{{user.name}}</td>
-              <td>{{user.loveVal}}</td>
+              <td>{{user.score}}</td>
               <td>{{user.love_total}}</td>
               <td>{{user.love_person}}</td>
               <td>{{user.love_times}}</td>
@@ -109,7 +109,7 @@
       </nz-tab>
       <nz-tab nzTitle="影响力">
         <p class="tips">*数据每天10:05更新</p>
-        <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
+        <p class="tips tips2">*默认按照该项分数由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable0 [nzData]="display_social" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">
           <thead (nzSortChange)="sort($event, weibo_social, display_social)" nzSingleSort>
@@ -117,14 +117,14 @@
               <th nzWidth="30px" nzLeft="0px">姓名</th>
               <th nzWidth="40px" nzShowSort nzSortKey="socialVal">分数</th>
               <th nzWidth="40px" nzShowSort nzSortKey="social_total">总值</th>
-              <th nzWidth="40px" nzShowSort nzSortKey="social_mention">提及阅读</th>
-              <th nzWidth="40px" nzShowSort nzSortKey="social_search">搜索量</th>
+              <th nzWidth="40px" nzShowSort nzSortKey="social_mention">提及</th>
+              <th nzWidth="40px" nzShowSort nzSortKey="social_search">搜索</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let user of weibo_social">
               <td nzLeft="0px">{{user.name}}</td>
-              <td>{{user.socialVal}}</td>
+              <td>{{user.score}}</td>
               <td>{{user.social_total}}</td>
               <td>{{user.social_mention}}</td>
               <td>{{user.social_search}}</td>
