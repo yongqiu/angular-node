@@ -75,7 +75,7 @@ export class TablesService {
     console.log(data)
     data.list.forEach(element => {
       weiboData.push({
-        create_date: moment.unix(element.create_date).format('MM-DD'),
+        create_date: moment.unix(element.create_date).subtract(1, 'days').format('MM-DD'),
         weibo_read: element.weibo_read,
         weibo_int: element.weibo_int,
         weibo_love: element.weibo_love,
@@ -92,7 +92,7 @@ export class TablesService {
     let suerData = [];
     data.list.forEach(element => {
       suerData.push({
-        create_date: moment.unix(element.create_date).format('MM-DD'),
+        create_date: moment.unix(element.create_date).subtract(1, 'days').format('MM-DD'),
         super_rank: element.super_rank,
         super_fans: element.super_fans,
         super_read: element.super_read,

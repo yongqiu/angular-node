@@ -1,14 +1,12 @@
 <div class="table-content">
-  <div class="tools">
-    <P class="title">YcY数据站-{{currentDate}}数据</P>
-  </div>
+  <P class="title">YcY数据站-{{currentDate}}数据</P>
   <p class="spinBox" *ngIf="loading">
     <nz-spin></nz-spin>
   </p>
   <div class="table-panel" *ngIf="!loading">
     <nz-tabset>
       <nz-tab nzTitle="总分">
-        <p class="tips">*数据每天凌晨02:05更新，当前数据为{{currentDate}}数据</p>
+        <p class="tips">*数据每天10:05更新，当前数据为{{currentDate}}数据</p>
 
         <nz-table #nzTable1 [nzData]="userList" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'450px',y: tablesService.tableHeight }"
           [nzBordered]="true">
@@ -35,7 +33,7 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="互动">
-        <p class="tips">*数据每天凌晨02:05更新</p>
+        <p class="tips">*数据每天10:05更新</p>
         <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable1 [nzData]="display_interact" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'500px',y: tablesService.tableHeight }"
           [nzBordered]="true">
@@ -62,7 +60,7 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="阅读">
-        <p class="tips">*数据每天凌晨02:05更新</p>
+        <p class="tips">*数据每天10:05更新</p>
         <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable2 [nzData]="display_read" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'420px',y: tablesService.tableHeight }"
           [nzBordered]="true">
@@ -85,7 +83,7 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="爱慕值">
-        <p class="tips">*数据每天凌晨02:05更新</p>
+        <p class="tips">*数据每天10:05更新</p>
         <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable3 [nzData]="display_love" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">
@@ -95,7 +93,7 @@
               <th nzWidth="40px" nzShowSort nzSortKey="loveVal">分数</th>
               <th nzWidth="50px" nzShowSort nzSortKey="love_total">爱慕值</th>
               <th nzWidth="40px" nzShowSort nzSortKey="love_person">送花人数</th>
-              <th nzWidth="40px" nzShowSort nzSortKey="love_times">送花数量</th>
+              <th nzWidth="40px" nzShowSort nzSortKey="love_times">送花次数</th>
             </tr>
           </thead>
           <tbody>
@@ -110,7 +108,7 @@
         </nz-table>
       </nz-tab>
       <nz-tab nzTitle="影响力">
-        <p class="tips">*数据每天凌晨02:05更新</p>
+        <p class="tips">*数据每天10:05更新</p>
         <p class="tips tips2">*默认按照总分由高到低排序，点击上下箭头进行单项排序</p>
         <nz-table #nzTable0 [nzData]="display_social" [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x:'600px',y: tablesService.tableHeight }"
           [nzBordered]="true">

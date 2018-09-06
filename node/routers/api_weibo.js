@@ -17,7 +17,7 @@ var schedule = require('node-schedule');
 var pool = mysql.createPool(dbConfig.mysql);
 
 function scheduleWeibo() {
-  let hourRule = '00 05 02 * * *'
+  let hourRule = '00 15 00 * * *'
   schedule.scheduleJob(hourRule, function () {
     console.log('scheduleCronstyle:' + new Date());
     loopUser()
