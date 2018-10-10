@@ -4,7 +4,7 @@
       <button nz-button nzType="primary" [nzSize]="'small'" (click)="refresh()">
         <i class="anticon anticon-reload"></i>刷新</button>
     </p>
-    <p class="tips">*当前页面为实时数据, 数据获取时间：{{currentTime}}</p>
+    <p class="tips">*数据每分钟获取一次, 当前数据获取时间：{{currentTime}}</p>
     <p class="tips tips2">*今日送花数量统计开始时间为每天00:00</p>
     <p class="spinBox" *ngIf="loading">
       <nz-spin></nz-spin>

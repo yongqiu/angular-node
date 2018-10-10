@@ -106,6 +106,7 @@ export class TablesService {
     let encode = encodeURI(name)
     let hotUrl = `/api/weibo/getHotSearch`
     let res = await this.requestService.queryServer({ url: hotUrl, method: 'get' }, { page: page, name: encode });
+    console.log(res)
     let data = JSON.parse(res.data);
     this.searchTotal = data.total;
     this.searchTotalPage = Math.ceil(data.total / 20)

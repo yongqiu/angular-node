@@ -24,6 +24,7 @@
     "request": "^2.88.0",
     "superagent": "^3.8.3",
     "superagent-charset": "^1.2.0",
+    "superagent-proxy": "^1.0.3",
     "swig": "^1.4.2"
   }
 }

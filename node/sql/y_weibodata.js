@@ -8,5 +8,9 @@ var y_weibodata = {
 
     insertLove: 'INSERT INTO y_lovedata(data,createdAt) VALUES(?,?)',
     queryLove: 'SELECT * FROM y_lovedata ORDER BY createdAt DESC LIMIT 1',
+
+    insertLoveMinute: 'INSERT INTO y_lovedata_minute(data, createdAt) VALUES(?,?)',
+    queryLoveMinute: 'SELECT * FROM y_lovedata_minute ORDER BY createdAt DESC LIMIT 1',
+    deletetenLines: 'DELETE FROM y_lovedata_minute ORDER BY id ASC LIMIT 1'
 };
 module.exports = y_weibodata;

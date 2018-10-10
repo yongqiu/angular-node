@@ -15,7 +15,7 @@ import { LayoutComponent } from './routes/layout/layout.component';
 
 registerLocaleData(zh);
 export const routes = [
-  { path: '', redirectTo: 'weibo-data/current', pathMatch: 'full' },
+  { path: '', redirectTo: 'table', pathMatch: 'full' },
   
   // {
   //   path: 'hot-search',
@@ -44,7 +44,7 @@ export const routes = [
   //   path: 'select',
   //   children: [{ path: '', loadChildren: './routes/select/select.module#SelectModule' }]
   // }
-  { path: '**', redirectTo: 'weibo-data/current' },
+  { path: '**', redirectTo: 'table' },
 ];
 
 

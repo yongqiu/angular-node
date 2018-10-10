@@ -6,6 +6,7 @@ var router = express.Router();
 var request = require('request');
 
 const superagent = require("superagent");
+require('superagent-proxy')(superagent);
 
 const cheerio = require("cheerio");
 // 表
@@ -16,23 +17,107 @@ var mysql = require('mysql');
 var schedule = require('node-schedule');
 var pool = mysql.createPool(dbConfig.mysql);
 
-function scheduleWeibo() {
-  let hourRule = '00 15 00 * * *'
-  schedule.scheduleJob(hourRule, function () {
-    console.log('scheduleCronstyle:' + new Date());
+
+async function scheduleWeibo() {
+  let userRule = '00 02 10 * * *'
+  schedule.scheduleJob(userRule, function () {
+    console.log('userRule:' + new Date());
     loopUser()
   });
 }
-function scheduleLove() {
-  let hourRule = '00 00 00 * * *'
-  schedule.scheduleJob(hourRule, function () {
-    console.log('scheduleCronstyle:' + new Date());
-    getLoveCurrent()
+
+async function scheduleLove() {
+  let loveRule = '00 01 00 * * *';
+  schedule.scheduleJob(loveRule, function () {
+    console.log('loveRule:' + new Date());
+    getLoveCurrent(false)
   });
 }
 
-scheduleWeibo()
-scheduleLove()
+async function scheduleTest() {
+  let second = '00 * * * * *';
+  schedule.scheduleJob(second, function () {
+    console.log('second:' + new Date());
+    getLoveCurrent(true)
+    deleteLines()
+  }); 
+}
+
+// // 早上10:30获取微博数据
+// scheduleWeibo()
+
+// // 每分钟获取爱慕值
+// scheduleTest()
+
+// // 零点获取鲜花
+// scheduleLove()
+
+
+
+function getLoveCurrent(isMinute) {
+  superagent.get(`https://m.weibo.cn/status/4280508277494385?`)
+    .end(function (err, obj) {
+      //获取页面文档数据
+      var content = obj.text;
+      //cheerio也就是nodejs下的jQuery  将整个文档包装成一个集合，定义一个变量$接收
+      var $ = cheerio.load(content);
+      script = $('body script').html();
+      let data = [{
+        userName: '杨超越',
+        key: 3,
+        love: script.match(/杨超越已收到(\S*)朵花/)[1]
+      }, {
+        userName: '赖美云',
+        key: 6,
+        love: script.match(/赖美云已收到(\S*)朵花/)[1]
+      }, {
+        userName: '紫宁',
+        key: 7,
+        love: script.match(/紫宁已收到(\S*)朵花/)[1]
+      }, {
+        userName: '杨芸晴',
+        key: 8,
+        love: script.match(/Sunnee已收到(\S*)朵花/)[1]
+      }]
+      // res.json({ data: JSON.stringify(data) })
+      if (isMinute){
+        pool.getConnection(function (err, connection) {
+          connection.query(y_weibodata.insertLoveMinute, [JSON.stringify(data), Date.parse(new Date()) / 1000], function (err, result) {
+            console.log('get by minute')
+            connection.release();
+          });
+        })
+      }else{
+        pool.getConnection(function (err, connection) {
+          connection.query(y_weibodata.insertLove, [JSON.stringify(data), Date.parse(new Date()) / 1000], function (err, result) {
+            console.log(err)
+            connection.release();
+          });
+        })
+      }
+    })
+}
+
+function deleteLines() {
+  pool.getConnection(function (err, connection) {
+    connection.query(y_weibodata.deletetenLines, [], function (err, result) {
+      console.log('minute delete')
+      connection.release();
+    });
+  })
+}
+
+
+// router.get('/getLoveBySecond', function (req, res, next) {
+//   // console.log(req.query)
+//   var responseData = {
+//     code: 200,
+//     data: test,
+//   }
+//   res.json(responseData)
+// })
+
+
 
 var banjiaUser = [{
   userName: '杨超越',
@@ -88,60 +173,33 @@ router.get('/info', function (req, res, next) {
     // }
   });
 })
+let proxy = [
+  'http://119.196.18.50:8080',
+  'http://125.62.26.197:3128',
+  'http://119.196.18.50:8080'
+]
+// var proxy = 'http://119.196.18.50:8080'; // 设置代理
 
+var header = {
+  'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Mobile Safari/537.36',
+};
 router.get('/getHotSearch', function (req, res, next) {
   // console.log(req.query)
-  var e = request({
-    url: `https://www.enlightent.com/research/top/getWeiboRankSearch?keyword=${req.query.name}&from=${req.query.page}`,
-    method: 'GET',
-    // headers: { 'Content-Type': 'text/json' }
-  }, function (error, response, body) {
-    var responseData = {
-      code: 200,
-      data: body,
-    }
-    res.json(responseData)
-    // res.send(JSON.parse(body));
-    // if (!error && response.statusCode == 200) {
-    //     res.render('task', { 'data': JSON.parse(body) });
-    // }
-  });
+  let ip = proxy[parseInt(Math.random() * proxy.length)]
+  superagent.get('https://www.enlightent.com/research/top/getWeiboRankSearch?keyword=%E6%9D%A8%E8%B6%85%E8%B6%8A&from=1')
+    .set('header', header)
+    .proxy(ip)
+    .end(async (err, obj) => {
+      // console.log(obj)
+      var responseData = {
+        code: 200,
+        data: obj.text,
+      }
+      res.json(responseData)
+    })
 })
 
-function getLoveCurrent() {
-  superagent.get(`https://m.weibo.cn/status/4280508277494385?`)
-    .end(function (err, obj) {
-      //获取页面文档数据
-      var content = obj.text;
-      //cheerio也就是nodejs下的jQuery  将整个文档包装成一个集合，定义一个变量$接收
-      var $ = cheerio.load(content);
-      script = $('body script').html();
-      let data = [{
-        userName: '杨超越',
-        key: 3,
-        love: script.match(/杨超越已收到(\S*)朵花/)[1]
-      }, {
-        userName: '赖美云',
-        key: 6,
-        love: script.match(/赖美云已收到(\S*)朵花/)[1]
-      }, {
-        userName: '紫宁',
-        key: 7,
-        love: script.match(/紫宁已收到(\S*)朵花/)[1]
-      }, {
-        userName: '杨芸晴',
-        key: 8,
-        love: script.match(/Sunnee已收到(\S*)朵花/)[1]
-      }]
-      // res.json({ data: JSON.stringify(data) })
-      pool.getConnection(function (err, connection) {
-        connection.query(y_weibodata.insertLove, [JSON.stringify(data), Date.parse(new Date()) / 1000], function (err, result) {
-          console.log(err)
-          connection.release();
-        });
-      })
-    })
-}
+
 router.get('/latest', function (req, res) {
   pool.getConnection(function (err, connection) {
     connection.query(y_weibodata.queryLove, [], function (err, result) {
@@ -162,35 +220,26 @@ router.get('/latest', function (req, res) {
 
 
 
-router.get('/loveCurrent', function (req, res, next) {
+router.get('/getLoveBySecond', function (req, res, next) {
   // console.log(req.query)
-  superagent.get(`https://m.weibo.cn/status/4280508277494385?`)
-    .end(function (err, obj) {
-      //获取页面文档数据
-      var content = obj.text;
-      //cheerio也就是nodejs下的jQuery  将整个文档包装成一个集合，定义一个变量$接收
-      var $ = cheerio.load(content);
-      script = $('body script').html();
-      let data = [{
-        userName: '杨超越',
-        key: 3,
-        love: script.match(/杨超越已收到(\S*)朵花/)[1]
-      }, {
-        userName: '赖美云',
-        key: 6,
-        love: script.match(/赖美云已收到(\S*)朵花/)[1]
-      }, {
-        userName: '紫宁',
-        key: 7,
-        love: script.match(/紫宁已收到(\S*)朵花/)[1]
-      }, {
-        userName: '杨芸晴',
-        key: 8,
-        love: script.match(/Sunnee已收到(\S*)朵花/)[1]
-      }]
-      res.json({ data: JSON.stringify(data) })
-    })
+  pool.getConnection(function (err, connection) {
+    connection.query(y_weibodata.queryLoveMinute, [], function (err, result) {
+      if (result) {
+        result = {
+          code: 200,
+          data: result
+        };
+      }
+      // console.log(err)
+      // 以json形式，把操作结果返回给前台页面
+      // 释放连接  
+      res.json(result)
+      connection.release();
+    });
+  })
 })
+
+
 router.get('/getAllUserDayData', function (req, res) {
   let weekFliter = req.query.weekFliter;
   // var id = req.query.id;
