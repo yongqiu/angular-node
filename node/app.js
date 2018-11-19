@@ -72,7 +72,7 @@ app.use('/api/robot', require('./routers/api_robot')); // admin的api路由
 app.use('/api/jd', require('./routers/api_jd')); // admin的api路由
 // app.use('/', require('./routers/main'));    //前端展示页面路由
 // app.use('/admin', require('./routers/admin'));    //后端展示页面路由
-var server = app.listen(3000, function () {
+var server = app.listen(7310, function () {
     var host = server.address().address;
     var port = server.address().port;
 

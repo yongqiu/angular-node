@@ -8,6 +8,14 @@
     padding-top: 48px;
     height: 100%;
     width: 100%;
+    p{
+        position: relative;
+        top: -20px;
+        text-align: center;
+        background: #e8e8e8;
+        /* color: #fff; */
+        color: #999;
+    }
 }
 .scroll-panel{
     height: 100%;
