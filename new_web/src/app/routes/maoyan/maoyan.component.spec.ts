@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JdComponent } from './jd.component';
+import { MaoyanComponent } from './maoyan.component';
 
-describe('JdComponent', () => {
-  let component: JdComponent;
-  let fixture: ComponentFixture<JdComponent>;
+describe('MaoyanComponent', () => {
+  let component: MaoyanComponent;
+  let fixture: ComponentFixture<MaoyanComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JdComponent ]
+      declarations: [ MaoyanComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JdComponent);
+    fixture = TestBed.createComponent(MaoyanComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

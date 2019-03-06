@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { JdComponent } from './jd.component';
+import { MaoyanComponent } from './maoyan.component';
 import { FormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { RouterModule } from '@angular/router';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -12,8 +12,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     FormsModule,
     NgZorroAntdModule,
     NgxEchartsModule,
-    RouterModule.forChild([{ path: '', component: JdComponent }]),
+    RouterModule.forChild([{ path: '', component: MaoyanComponent }]),
   ],
-  declarations: [JdComponent]
+  declarations: [MaoyanComponent]
 })
-export class JdModule { }
+export class MaoyanModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, Params, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TablesService } from '../../services/tables.service';
 import 'rxjs/add/operator/filter';
+import { RequestService } from '../../services/request.service';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -10,7 +11,7 @@ import 'rxjs/add/operator/filter';
 export class LayoutComponent implements OnInit {
   @ViewChild('content') content;
   topic: string;
-  constructor(private router: Router, public tablesService: TablesService, private activatedRoute: ActivatedRoute) {
+  constructor(public requestService: RequestService,private router: Router, public tablesService: TablesService, private activatedRoute: ActivatedRoute) {
     this.router.events.filter((event) => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
       //do something
       // console.log(event)
@@ -42,6 +43,9 @@ export class LayoutComponent implements OnInit {
     //   console.log(this.tablesService.tableHeight)
     // }
     // console.log(contentWidth)
+  }
+  routeToMaoyan() {
+    this.router.navigate(["maoyan"]);
   }
 
   routeToHot() {

@@ -1,0 +1,30 @@
+<div class="title">
+<p >
+  最美公益女神
+  
+</p>
+<span class="dsp">获取时间：{{currentData}}</span>
+<div class="button" (click)="getData()">
+  刷新数据
+</div>
+</div>
+
+
+<div class="table-panel">
+  <nz-table #nzTable2 [nzData]="dataSet" [nzFrontPagination]="false" [nzShowPagination]="false" [nzBordered]="true">
+    <thead>
+      <tr>
+        <th nzWidth="30px">姓名</th>
+        <th nzWidth="40px"> 排名</th>
+        <th nzWidth="40px">人气值</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of nzTable2.data;let i =index">
+        <td>{{data.celebrityName}}</td>
+        <td>{{i+1}}</td>
+        <td>{{data.popValue}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

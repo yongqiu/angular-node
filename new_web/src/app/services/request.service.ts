@@ -15,7 +15,7 @@ import { HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class RequestService {
-
+  routerName: string;
   private token: string;
   public http: Http;
   public httpClient: HttpClient;

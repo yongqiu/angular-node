@@ -1,0 +1,25 @@
+.title{
+  position: relative;
+  .button{
+    position: absolute;
+    top: 10px;
+    background: #1790ff;
+    padding: 5px 10px;
+    right: 20px;
+    cursor: pointer;
+    color: #fff;
+  }
+}
+p{
+      color: #1790ff;
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+    padding: 6px 0px 0px 0px;
+  }
+  .dsp{
+          width: 100%;
+    text-align: center;
+    display: block;
+    font-size: 12px;
+    }

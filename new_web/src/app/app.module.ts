@@ -28,6 +28,7 @@ export const routes = [
       { path: 'table', loadChildren: './routes/tables/tables.module#TablesModule' },
       { path: 'hot-search', loadChildren: './routes/hot-search/hot-search.module#HotSearchModule' },
       { path: 'charts', loadChildren: './routes/charts/charts.module#ChartsModule' },
+      { path: 'maoyan', loadChildren: './routes/maoyan/maoyan.module#MaoyanModule' },
       // { path: 'jd', loadChildren: './routes/jd/jd.module#JdModule' },
       // { path: 'qqmusic', loadChildren: './routes/qqmusic/qqmusic.module#QqmusicModule' },
       // { path: 'weibo-data', loadChildren: './routes/weibo/weibo.module#WeiboModule' },

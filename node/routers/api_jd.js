@@ -34,7 +34,6 @@ function getMusicDatabyMinute() {
     console.log("getJDdataMinute" + new Date());
     // 专辑销量
     updatejdData()
-    deleteLines()
   });
 }
 
@@ -129,7 +128,7 @@ router.get('/getData', function (req, res) {
 router.get('/getCurrentData', function (req, res) {
   // var id = req.query.id;
   var e = request({
-    url: `http://223.252.210.60:18888/data`,
+    url: `https://m.maoyan.com/sns/assist/assemble/activity/rank.json?offset=0&limit=500&assembleActivityId=217`,
     method: 'GET',
     // headers: { 'Content-Type': 'text/json' }
   }, function (error, response, body) {
