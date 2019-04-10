@@ -1,23 +1,28 @@
-.header{
+.header {
     position: absolute;
     top: 0px;
     width: 100%;
     z-index: 999;
 }
-.content{
+
+.content {
     padding-top: 48px;
     height: 100%;
     width: 100%;
-    p{
+    p {
         position: relative;
-        top: -20px;
         text-align: center;
         background: #e8e8e8;
         /* color: #fff; */
         color: #999;
+        margin-top: 30px;
     }
 }
-.scroll-panel{
+
+.scroll-panel {
     height: 100%;
     overflow: auto;
+    padding: 0 20px;
+    max-width: 1000px;
+    margin: 0 auto;
 }

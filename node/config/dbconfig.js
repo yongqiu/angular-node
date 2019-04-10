@@ -1,7 +1,7 @@
 module.exports = {
     mysql: {
-        host: '118.25.236.170',
-        user: 'client',
+        host: '39.105.149.189',
+        user: 'root',
         password: 'wyq#120921',
         database: 'ycydata', // 前面建的user表位于这个数据库中 
         port: 3306

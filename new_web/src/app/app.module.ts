@@ -15,7 +15,7 @@ import { LayoutComponent } from './routes/layout/layout.component';
 
 registerLocaleData(zh);
 export const routes = [
-  { path: '', redirectTo: 'table', pathMatch: 'full' },
+  { path: '', redirectTo: 'maoyan', pathMatch: 'full' },
   
   // {
   //   path: 'hot-search',
@@ -25,9 +25,9 @@ export const routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'table', loadChildren: './routes/tables/tables.module#TablesModule' },
+      // { path: 'table', loadChildren: './routes/tables/tables.module#TablesModule' },
       { path: 'hot-search', loadChildren: './routes/hot-search/hot-search.module#HotSearchModule' },
-      { path: 'charts', loadChildren: './routes/charts/charts.module#ChartsModule' },
+      // { path: 'charts', loadChildren: './routes/charts/charts.module#ChartsModule' },
       { path: 'maoyan', loadChildren: './routes/maoyan/maoyan.module#MaoyanModule' },
       // { path: 'jd', loadChildren: './routes/jd/jd.module#JdModule' },
       // { path: 'qqmusic', loadChildren: './routes/qqmusic/qqmusic.module#QqmusicModule' },
@@ -46,7 +46,7 @@ export const routes = [
   //   path: 'select',
   //   children: [{ path: '', loadChildren: './routes/select/select.module#SelectModule' }]
   // }
-  { path: '**', redirectTo: 'table' },
+  { path: '**', redirectTo: 'maoyan' },
 ];
 
 

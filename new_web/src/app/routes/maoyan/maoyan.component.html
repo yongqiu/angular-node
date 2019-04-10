@@ -1,30 +1,42 @@
-<div class="title">
-<p >
-  最美公益女神
-  
-</p>
-<span class="dsp">获取时间：{{currentData}}</span>
-<div class="button" (click)="getData()">
-  刷新数据
-</div>
-</div>
+<!-- <div class="title">
+  <p></p>
 
+  <div class="button" (click)="getData()">
+    刷新数据
+  </div>
+</div> -->
+<nz-tabset>
+  <nz-tab nzTitle="走势图">
+    <div style="height: 400px;" echarts [options]="chartOptions" class="demo-chart"></div>
+  </nz-tab>
+  <nz-tab nzTitle="表格">
+    <span class="dsp">*第一行为当前时刻数据</span>
+    <span class="dsp">获取时间：{{time}}</span>
+    <div class="table-panel">
+      <div class="table-inner">
+          <nz-table #nzTable2 [nzData]="dataSet" [nzFrontPagination]="false" [nzShowPagination]="false" [nzBordered]="true">
+              <thead>
+                <tr>
+                  <th nzWidth="20%">ycy</th>
+                  <th nzWidth="20%">wxy</th>
+                  <th nzWidth="20%">ycy涨幅</th>
+                  <th nzWidth="20%">wxy涨幅</th>
+                  <th nzWidth="20%">时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of nzTable2.data;let i =index" [ngClass]="{'blue-row':i==0}">
+                  <td>{{data.ycy}}</td>
+                  <td>{{data.wxy}}</td>
+                  <td [ngClass]="{'warning':data.ycybet >= data.wxybet}">{{data.ycybet}}</td>
+                  <td [ngClass]="{'warning':data.ycybet <=data.wxybet}">{{data.wxybet}}</td>
+                  <td>{{data.createAt}}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+      </div>
+      
+    </div>
+  </nz-tab>
 
-<div class="table-panel">
-  <nz-table #nzTable2 [nzData]="dataSet" [nzFrontPagination]="false" [nzShowPagination]="false" [nzBordered]="true">
-    <thead>
-      <tr>
-        <th nzWidth="30px">姓名</th>
-        <th nzWidth="40px"> 排名</th>
-        <th nzWidth="40px">人气值</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of nzTable2.data;let i =index">
-        <td>{{data.celebrityName}}</td>
-        <td>{{i+1}}</td>
-        <td>{{data.popValue}}</td>
-      </tr>
-    </tbody>
-  </nz-table>
-</div>
+</nz-tabset>
