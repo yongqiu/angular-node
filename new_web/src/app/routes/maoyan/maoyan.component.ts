@@ -79,7 +79,10 @@ export class MaoyanComponent implements OnInit {
     }
     return newArray
   }
-
+  
+  /**
+   * 获取当前数据
+   */
   async getData() {
     let res = await this.requestService.queryServer({ url: `/api/maoyan/getCurrentData`, method: "get" }, {});
     console.log(res);
@@ -90,6 +93,10 @@ export class MaoyanComponent implements OnInit {
     });
   }
 
+  /**
+   * 获取个人数据
+   * @param celebrityId 
+   */
   async getDataByUser(celebrityId: number) {
     let res = await this.requestService.queryServer({ url: `/api/maoyan/getDataById`, method: "get" }, { celebrityId: celebrityId });
     console.log(res);

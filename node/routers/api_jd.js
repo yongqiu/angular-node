@@ -12,11 +12,6 @@ var mysql = require('mysql');
 var schedule = require('node-schedule');
 var pool = mysql.createPool(dbConfig.mysql);
 
-var USERCONFIG = {
-  '杨超越': 2854373,
-  '吴宣仪': 2825632
-}
-
 function scheduleCronstyle() {
   let hourRule = '00 00 * * * *' // 每小时的00分00秒
   let minuteRule = '00 * * * * *'
@@ -49,7 +44,7 @@ getMusicDatabyMinute()
 
 function deleteLines() {
   pool.getConnection(function (err, connection) {
-    connection.query(y_maoyan.deletetenLines, [2], function (err, result) {
+    connection.query(y_maoyan.deletetenLines, [20], function (err, result) {
       if (result) {
         result = {
           code: 200,
@@ -67,29 +62,31 @@ function deleteLines() {
 
 function updatejdData() {
   var e = request({
-    url: `https://m.maoyan.com/sns/assist/assemble/activity/rank.json?offset=0&limit=500&assembleActivityId=217`,
+    url: `https://m.ke.qq.com/cgi-proxy/vote_activity/work/ranklist?act_id=1&limit=200&bkn=764306576&_=1554896511586`,
     method: 'GET',
-    // headers: { 'Content-Type': 'text/json' }
+    headers: { 'Referer': 'https://m.ke.qq.com/mcates/ccyy/rank.html?act_id=1' }
   }, function (error, response, body) {
-    JSON.parse(body).data.celebrityList.forEach(element => {
-      if (USERCONFIG[element.celebrityName]) {
+    JSON.parse(body).result.rank_list.forEach((element, i) => {
+      if (i < 19) {
         pool.getConnection(function (err, connection) {
           var param = [
-            element.celebrityName,
-            element.popValue,
-            element.celebrityId,
-            element.celebrityAvatar,
+            element.work_name,
+            element.votes,
+            element.work_id,
+            element.team_name,
             Date.parse(new Date()) / 1000,
+            element.rank
           ];
           connection.query(y_maoyan.insert, param, function (err, result) {
             // 以json形式，把操作结果返回给前台页面
             // 释放连接
-            console.log(err)
+            if (err != null) {
+              console.log(err)
+            }
             connection.release();
           });
         });
       }
-
     });
 
   });
@@ -129,9 +126,9 @@ router.get('/getAll', function (req, res) {
 router.get('/getCurrentData', function (req, res) {
   // var id = req.query.id;
   var e = request({
-    url: `https://m.maoyan.com/sns/assist/assemble/activity/rank.json?offset=0&limit=500&assembleActivityId=217`,
+    url: `https://m.ke.qq.com/cgi-proxy/vote_activity/work/ranklist?act_id=1&limit=200&bkn=764306576&_=1554896511586`,
     method: 'GET',
-    // headers: { 'Content-Type': 'text/json' }
+    headers: { 'Referer': 'https://m.ke.qq.com/mcates/ccyy/rank.html?act_id=1' }
   }, function (error, response, body) {
     var responseData = {
       code: 200,
