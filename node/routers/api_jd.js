@@ -16,18 +16,18 @@ function scheduleCronstyle() {
   let hourRule = '00 00 * * * *' // 每小时的00分00秒
   let minuteRule = '00 * * * * *'
   schedule.scheduleJob(hourRule, function () {
-    console.log('scheduleCronstyle:' + new Date());
+    console.log('getdataHour:' + new Date());
     updatejdData()
   });
 }
 
 function getMusicDatabyMinute() {
   var rule = new schedule.RecurrenceRule();
-  rule.minute = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+  rule.minute = [0, 30];
   schedule.scheduleJob(rule, function () {
-    console.log("getJDdataMinute" + new Date());
+    console.log("getdataMinute" + new Date());
     // 猫眼数据
-    // updatejdData()
+    updatejdData()
     // deleteLines()
   });
 }
@@ -35,7 +35,8 @@ function getMusicDatabyMinute() {
 
 // updatejdData()
 // scheduleCronstyle();
-scheduleCronstyle()
+getMusicDatabyMinute();
+
 
 // 所有路径的api请求，都默认返回的参数
 /*
@@ -67,28 +68,25 @@ function updatejdData() {
     headers: { 'Referer': 'https://m.ke.qq.com/mcates/ccyy/rank.html?act_id=1' }
   }, function (error, response, body) {
     JSON.parse(body).result.rank_list.forEach((element, i) => {
-      if (i < 20) {
-        pool.getConnection(function (err, connection) {
-          var param = [
-            element.work_name,
-            element.votes,
-            element.work_id,
-            element.team_name,
-            Date.parse(new Date()) / 1000,
-            element.rank
-          ];
-          connection.query(y_maoyan.insert, param, function (err, result) {
-            // 以json形式，把操作结果返回给前台页面
-            // 释放连接
-            if (err != null) {
-              console.log(err)
-            }
-            connection.release();
-          });
+      pool.getConnection(function (err, connection) {
+        var param = [
+          element.work_name,
+          element.votes,
+          element.work_id,
+          element.team_name,
+          Date.parse(new Date()) / 1000,
+          element.rank
+        ];
+        connection.query(y_maoyan.insert, param, function (err, result) {
+          // 以json形式，把操作结果返回给前台页面
+          // 释放连接
+          if (err != null) {
+            console.log(err)
+          }
+          connection.release();
         });
-      }
+      });
     });
-
   });
 };
 
