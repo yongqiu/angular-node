@@ -17,7 +17,7 @@ function scheduleCronstyle() {
   let minuteRule = '00 * * * * *'
   schedule.scheduleJob(hourRule, function () {
     console.log('scheduleCronstyle:' + new Date());
-    updateMusicRank();
+    updatejdData()
   });
 }
 
@@ -27,15 +27,15 @@ function getMusicDatabyMinute() {
   schedule.scheduleJob(rule, function () {
     console.log("getJDdataMinute" + new Date());
     // 猫眼数据
-    updatejdData()
-    deleteLines()
+    // updatejdData()
+    // deleteLines()
   });
 }
 
 
 // updatejdData()
 // scheduleCronstyle();
-getMusicDatabyMinute()
+scheduleCronstyle()
 
 // 所有路径的api请求，都默认返回的参数
 /*
@@ -67,7 +67,7 @@ function updatejdData() {
     headers: { 'Referer': 'https://m.ke.qq.com/mcates/ccyy/rank.html?act_id=1' }
   }, function (error, response, body) {
     JSON.parse(body).result.rank_list.forEach((element, i) => {
-      if (i < 19) {
+      if (i < 20) {
         pool.getConnection(function (err, connection) {
           var param = [
             element.work_name,
@@ -162,5 +162,22 @@ router.get('/getDataById', function (req, res) {
   })
 })
 
+router.get('/getDataLimit', function (req, res) {
+  pool.getConnection(function (err, connection) {
+    connection.query(y_maoyan.queryLimit, [240], function (err, result) {
+      if (result) {
+        result = {
+          code: 200,
+          msg: result
+        };
+      }
+      console.log(err)
+      // 以json形式，把操作结果返回给前台页面
+      // 释放连接  
+      res.json(result)
+      connection.release();
+    });
+  })
+})
 
 module.exports = router

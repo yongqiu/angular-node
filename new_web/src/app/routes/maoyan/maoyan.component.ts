@@ -20,51 +20,51 @@ export class MaoyanComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.getUserData();
   }
 
   async getUserData() {
-    await this.getData();
-    console.log(this.currentData)
-    let ycydata = await this.getDataByUser(2854373);
-    let wxydata = await this.getDataByUser(2825632);
-    let unix = []
-    ycydata.forEach(info => {
-      unix.push(info.createAt)
-      this.dates.push(moment.unix(info.createAt).format("MM-DD HH:mm"));
-    });
-    this.ycydata = this.getBetweenArray(ycydata).reverse()
-    this.wxydata = this.getBetweenArray(wxydata).reverse()
-    let tableDate = [];
-    let currentycy = this.currentData.find(item => { return item.celebrityId == 2854373 });
-    console.log(currentycy)
-    let currentwxy = this.currentData.find(item => { return item.celebrityId == 2825632 });
-    this.time = moment().format("MM-DD HH:mm");
-    let current = {
-      ycy: currentycy.popValue,
-      wxy: currentwxy.popValue,
-      ycybet: currentycy.popValue - ycydata[0].popValue,
-      wxybet: currentwxy.popValue - wxydata[0].popValue,
-      createAt: this.time
-    }
-    
-    tableDate.push(current)
-    for (let i = 0; i < this.dates.length; i++) {
-      if (ycydata[i + 1]) {
-        tableDate.push({
-          ycy: ycydata[i].popValue,
-          wxy: wxydata[i].popValue,
-          ycybet: ycydata[i].popValue - ycydata[i + 1].popValue,
-          wxybet: wxydata[i].popValue - wxydata[i + 1].popValue,
-          createAt: this.dates[i]
-        })
+    let list = await this.getLimitData();
+    let dataSet = [];
+    list.forEach(element => {
+      if(element.rank == 1){
+        this.dates.push(moment.unix(element.createAt).format("DD日HH:mm"))
       }
+      let finder = dataSet.find(item => element.celebrityId == item.id)
+      if (!finder) {
+        dataSet.push({
+          id: element.celebrityId,
+          rank: element.rank,
+          name: element.celebrityName,
+          data: [element]
+        })
+      } else {
+        finder.data.push(element)
+      }
+    });
+    let aa = JSON.stringify(dataSet);
+    console.log(JSON.parse(aa))
+    this.dates.reverse()
+    this.dates.splice(0, 1)
+    console.log(dataSet)
+    console.log(this.dates)
+    dataSet.forEach(item => {
+      let newArray = this.getBetweenArray(item.data);
+      item.data = newArray.reverse();
+    })
+    
 
+    for (var i = 0; i < dataSet.length; i++) {
+      for (var j = i + 1; j < dataSet.length; j++) {
+        if (dataSet[i].rank > dataSet[j].rank) {
+          var t = dataSet[i];
+          dataSet[i] = dataSet[j];
+          dataSet[j] = t;
+        }
+      }
     }
-    this.dataSet = tableDate
-    console.log(tableDate)
-    this.renderChart();
+    console.log(dataSet)
+    this.dataSet = dataSet;
   }
 
   private getBetweenArray(array) {
@@ -79,7 +79,7 @@ export class MaoyanComponent implements OnInit {
     }
     return newArray
   }
-  
+
   /**
    * 获取当前数据
    */
@@ -91,6 +91,15 @@ export class MaoyanComponent implements OnInit {
     res.data.data.celebrityList.forEach(element => {
       this.currentData.push(element);
     });
+  }
+
+  /**
+   * 获取当前数据
+   */
+  async getLimitData() {
+    let res = await this.requestService.queryServer({ url: `/api/maoyan/getDataLimit`, method: "get" }, {});
+    console.log(res);
+    return res.msg
   }
 
   /**
